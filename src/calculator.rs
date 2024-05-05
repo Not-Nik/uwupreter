@@ -15,6 +15,7 @@
 //! println!("Final result: {}", result); // prints 7
 //! ```
 
+use std::collections::HashMap;
 use crate::parse_tree::*;
 
 /// `Calculator` is a struct designed to evaluate parsed arithmetic expressions.
@@ -30,15 +31,45 @@ use crate::parse_tree::*;
 /// ```
 #[derive(Default)]
 pub struct Calculator {
-	// TODO: eventuell notwendige Attribute aufnehmen
+	variables: HashMap<char, i64>
 }
 
 impl Calculator {
 	/// Evaluates the entire parse tree starting from a [`Root`] and returns the
 	/// result of the last expression evaluated.
-	pub fn calc(&mut self, _t: &Root) -> i64 {
-		todo!("Ergebnis durch Ablaufen des Baums bestimmen")
+	pub fn calc(&mut self, root: &Root) -> i64 {
+        let mut last_result = 0;
+
+        // Run through all the statements in root
+        for stmt in &root.stmt_list {
+            last_result = self.calc_stmt(stmt);
+        }
+        last_result
 	}
+
+    pub fn calc_stmt(&mut self, stmt: &Stmt) -> i64 {
+        match stmt {
+            // Either calculate the expression
+            Stmt::Expr(expr) => self.calc_expr(expr),
+            // Or calculate it and set the variable
+            Stmt::Set(var, expr) => {
+                let val = self.calc_expr(expr);
+                self.variables.insert(*var, val);
+                0
+            },
+        }
+    }
+
+    pub fn calc_expr(&mut self, expr: &Expr) -> i64 {
+        match expr {
+            Expr::Int(int) => *int,
+            Expr::Var(var) => self.variables[var],
+            Expr::Add(left, right) => self.calc_expr(left) + self.calc_expr(right),
+            Expr::Sub(left, right) => self.calc_expr(left) - self.calc_expr(right),
+            Expr::Mul(left, right) => self.calc_expr(left) * self.calc_expr(right),
+            Expr::Div(left, right) => self.calc_expr(left) / self.calc_expr(right),
+        }
+    }
 }
 
 impl Visitor for Calculator {
