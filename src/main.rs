@@ -1,6 +1,6 @@
 use std::{env, fs};
 use logos::Logos;
-use uwupreter::lexer::Token;
+use uwupreter::token::Token;
 
 fn main() {
     let args: Vec<_> = env::args().collect();
