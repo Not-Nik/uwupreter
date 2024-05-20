@@ -1,6 +1,5 @@
 use std::fmt;
 use logos::Logos;
-use crate::lexer::Lexer;
 
 /// The [`Lexer`] turns a string (`&str`) into a stream of `Token`s.
 ///
@@ -129,10 +128,10 @@ pub enum Token {
     Ident(String),
 
     //#[regex(r"/\*[^(/\*)]+\*/", logos::skip)] ignowiewe diesen vewsuch
-    #[regex(r"/\*([^*]?|\*[^/])*\*/", logos::skip)]
+    #[regex(r"/\*(([^*].)|.[^/])*\*/", logos::skip)]
     BlockComment,
 
-    #[regex("//[.]*", logos::skip)]
+    #[regex(r"//[^\n]*\n", logos::skip)]
     LineComment,
 
     #[regex(r"[ \t\n\f]+", logos::skip)]

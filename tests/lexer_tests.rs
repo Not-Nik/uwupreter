@@ -1,4 +1,4 @@
-use uwupreter::lexer::Token::{self, *};
+use uwupreter::token::Token::{self, *};
 use logos::Logos;
 
 #[test]
