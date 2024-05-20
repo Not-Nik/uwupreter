@@ -121,7 +121,7 @@ pub enum Token {
     BoolLiteral(bool),
 
     //#[regex("\"[a-z|A-Z|\\\"| ]*\"", |lex| lex.slice().to_owned())] ignowiewe diesen vewsuch
-    #[regex("\"[^.|\"]*\"", |lex| lex.slice().to_owned())]
+    #[regex(r#""([^"\n])*""#, |lex| { let t = lex.slice(); t[1..t.len()-1].to_owned()})]
     StringLiteral(String),
 
     #[regex("[a-z|A-Z|_]+[a-z|A-Z|_|0-9]*", |lex| lex.slice().to_owned())]
