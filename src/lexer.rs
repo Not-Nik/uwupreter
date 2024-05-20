@@ -12,7 +12,7 @@
 //! whitespace and comments:
 //!
 //! ```rust
-//! use c1::lexer::{Lexer, Token};
+//! use uwupreter::lexer::{Lexer, Token};
 //!
 //! let input = "int answer = 42;";
 //! let lexer = Lexer::new(input);
@@ -35,7 +35,7 @@
 //! If an unknown token is encountered, an error is returned by the iterator:
 //!
 //! ```rust
-//! use c1::lexer::{Lexer, Token, LexicalError};
+//! use uwupreter::lexer::{Lexer, Token, LexicalError};
 //!
 //! let input = "100%";
 //! let lexer = Lexer::new(input);
