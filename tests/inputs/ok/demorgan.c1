@@ -1,0 +1,45 @@
+/* Überprueft deMorgans Law */
+
+bool not(bool b) {
+    if (b == true)
+        return false;
+    else
+        return true;
+}
+
+bool morgan11(bool a, bool b) {
+    return not(a || b);
+}
+bool morgan12(bool a, bool b) {
+    return not(a) && not(b);
+}
+
+bool morgan21(bool a, bool b) {
+    return not(a && b);
+}
+bool morgan22(bool a, bool b) {
+    return not(a) || not(b);
+}
+
+void main() {
+    bool a = true;
+    bool b = true;
+    int i = 0;
+
+    print("Testing deMorgans Law");
+
+    do {
+        do {
+            print(i);
+
+            print(morgan11(a, b));
+            print(morgan12(a, b));
+            print(morgan21(a, b));
+            print(morgan22(a, b));
+
+            i = i + 1;
+            b = not(b);
+        } while (b != true);
+        a = not(a);
+    } while (a != true);
+}
