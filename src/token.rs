@@ -107,13 +107,13 @@ pub enum Token {
     #[token("}")]
     RBrace,
 
-    #[regex("[0-9]+", |lex| lex.slice().parse::<i64>().unwrap())]
+    #[regex("[0-9]+", |lex| lex.slice().parse::<i64>().ok())]
     IntLiteral(i64),
 
     //#[regex(r"([0-9]*\.[([0-9]+)|([0-9]+[e|E][-|+]?[0-9]+)])", |lex| lex.slice().parse::<f64>().unwrap())] ignowiewe diesen vewsuch
-    #[regex(r"[0-9]*\.[0-9]+", |lex| lex.slice().parse::<f64>().unwrap())]
-    #[regex(r"[0-9]*\.[0-9]+e[\+|-]?[0-9]+", |lex| lex.slice().parse::<f64>().unwrap())]
-    #[regex(r"[0-9]+E[\+|-]?[0-9]+", |lex| lex.slice().parse::<f64>().unwrap())]
+    #[regex(r"[0-9]*\.[0-9]+", |lex| lex.slice().parse::<f64>().ok())]
+    #[regex(r"[0-9]*\.[0-9]+e[\+|-]?[0-9]+", |lex| lex.slice().parse::<f64>().ok())]
+    #[regex(r"[0-9]+E[-]?[0-9]+", |lex| lex.slice().parse::<f64>().ok())]
     FloatLiteral(f64),
 
     #[token("false", |_| false)]
