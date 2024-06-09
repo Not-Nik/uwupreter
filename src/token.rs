@@ -126,7 +126,7 @@ pub enum Token {
     Ident(String),
 
     //#[regex(r"/\*[^(/\*)]+\*/", logos::skip)] ignowiewe diesen vewsuch
-    #[regex(r"/\*(([^*].)|.[^/])*\*/", logos::skip)]
+    #[regex(r"/\*/*(\*|[^/\*][^\*]*\*)+/", logos::skip)]
     BlockComment,
 
     #[regex(r"//[^\n]*\n", logos::skip)]
