@@ -49,9 +49,108 @@ extern {
     }
 }
 
+Ident: ast::Ident = {
+    <i:"ident"> => ast::Ident(i.to_string()),
+}
+
 // top-level grammar rule
 pub Program: ast::Program = {
     Item* => ast::Program { items: <> }
 };
 
-Item: ast::Item = {};
+Item: ast::Item = {
+    <a:DeclAssignment> ";" => ast::Item::GlobalVar(a),
+    <f:FunctionDefinition> => ast::Item::Func(f),
+};
+
+FunctionDefinition: ast::FuncDef = {
+    <return_type:Type> <ident:Ident> "(" <p:ParameterList?> ")" "{" <statements:StatementList> "}" =>
+        ast::FuncDef {
+             return_type,
+             ident,
+             params: p.unwrap_or(vec![]),
+             statements
+        },
+};
+
+ParameterList: Vec<ast::FuncParam> = {
+    <data_type:Type> <ident:Ident> <end:("," <Type> <Ident>)*> => {
+        let mut last_params = end;
+        last_params.insert(0, (data_type, ident));
+        last_params.into_iter().map(|(d, i)|
+            ast::FuncParam { data_type: d, ident: i } ).collect::<Vec<ast::FuncParam>>()
+    }
+};
+
+FunctionCall: ast::FuncCall = {
+    <ident:Ident> "(" <args:(<Assignment> <("," <Assignment>)*>)?> ")" =>
+        ast::FuncCall {
+            res_ident: ast::ResIdent::new(ident),
+            args: args.map(|(a, mut v)| {
+                        v.insert(0, a);
+                        v
+                    })
+                        .unwrap_or(vec![])
+                        .into_iter()
+                        .map(|a| ast::Expr::Assign(a))
+                        .collect::<Vec<ast::Expr>>(),
+        }
+}
+
+StatementList: Vec<ast::Stmt> = {
+    Statement* => <>
+};
+
+Block: ast::Block = {
+    "{" <statements:StatementList> "}" => ast::Block { statements }
+};
+
+Statement: ast::Stmt = {
+    <i:IfStatement> => ast::Stmt::If(i),
+    <f:ForStatement> => ast::Stmt::For(f),
+    <d:DoWhileStatement> ";" => ast::Stmt::DoWhile(d),
+    <w:WhileStatement> => ast::Stmt::While(w),
+    <r:ReturnStatement> ";" => ast::Stmt::Return(r),
+    <p:Print> ";" => ast::Stmt::Print(p),
+    <d:DeclAssignment> ";" => ast::Stmt::VarDef(d),
+    <a:StatAssignment> ";" => ast::Stmt::Assign(a),
+    <f:FunctionCall> ";" => ast::Stmt::Call(f),
+    <b:Block> => ast::Stmt::Block(b),
+    ";" => ast::Stmt::Empty
+};
+
+IfStatement: ast::IfStmt = {
+
+};
+
+ForStatement: ast::ForStmt = {
+
+};
+
+WhileStatement: ast::WhileStmt = {
+
+};
+
+DoWhileStatement: ast::WhileStmt = {
+
+};
+
+ReturnStatement: Option<ast::Expr> = {
+
+};
+
+Print: ast::PrintStmt = {
+
+};
+
+DeclAssignment: ast::VarDef = {
+};
+
+Type: ast::DataType = {
+};
+
+StatAssignment: ast::Assign = {
+};
+
+Assignment: ast::Assign = {
+};
