@@ -1,0 +1,20 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        String(
+                            "hello world",
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

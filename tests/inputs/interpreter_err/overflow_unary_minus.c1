@@ -1,0 +1,6 @@
+// Signed overflow is undefined behavior!
+
+void main() {
+    // We don't support literal `-9223372036854775808`.
+    int x = -(-9223372036854775807 - 1);
+}

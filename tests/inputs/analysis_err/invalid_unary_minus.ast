@@ -1,0 +1,26 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        Expr(
+                            UnaryMinus(
+                                Literal(
+                                    Bool(
+                                        true,
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

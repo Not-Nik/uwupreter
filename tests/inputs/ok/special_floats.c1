@@ -1,0 +1,12 @@
+void main() {
+    float pos_inf = 1.0 / 0;
+    float neg_inf = -1.0 / 0;
+    float nan = 0.0 / 0;
+
+    print(pos_inf); // inf
+    print(neg_inf); // -inf
+    print(nan);     // NaN
+
+    print(nan == nan); // false
+    print(nan != nan); // true
+}

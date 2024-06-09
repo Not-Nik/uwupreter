@@ -1,0 +1,227 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "fibonacci",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "n",
+                        ),
+                    },
+                ],
+                statements: [
+                    If(
+                        IfStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Leq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "n",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_true: Return(
+                                Some(
+                                    Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "n",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                ),
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    Return(
+                        Some(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "fibonacci",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                BinaryOp(
+                                                    BinOpExpr {
+                                                        op: Sub,
+                                                        lhs: Var(
+                                                            ResIdent {
+                                                                ident: Ident(
+                                                                    "n",
+                                                                ),
+                                                                res: None,
+                                                            },
+                                                        ),
+                                                        rhs: Literal(
+                                                            Int(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    },
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "fibonacci",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                BinaryOp(
+                                                    BinOpExpr {
+                                                        op: Sub,
+                                                        lhs: Var(
+                                                            ResIdent {
+                                                                ident: Ident(
+                                                                    "n",
+                                                                ),
+                                                                res: None,
+                                                            },
+                                                        ),
+                                                        rhs: Literal(
+                                                            Int(
+                                                                2,
+                                                            ),
+                                                        ),
+                                                    },
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    For(
+                        ForStmt {
+                            init: VarDef(
+                                VarDef {
+                                    data_type: Int,
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "n",
+                                        ),
+                                        res: None,
+                                    },
+                                    init: Some(
+                                        Literal(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                },
+                            ),
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Lt,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "n",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            30,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            update: Assign {
+                                lhs: ResIdent {
+                                    ident: Ident(
+                                        "n",
+                                    ),
+                                    res: None,
+                                },
+                                rhs: BinaryOp(
+                                    BinOpExpr {
+                                        op: Add,
+                                        lhs: Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "n",
+                                                ),
+                                                res: None,
+                                            },
+                                        ),
+                                        rhs: Literal(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            },
+                            body: Print(
+                                Expr(
+                                    Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "fibonacci",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Var(
+                                                    ResIdent {
+                                                        ident: Ident(
+                                                            "n",
+                                                        ),
+                                                        res: None,
+                                                    },
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

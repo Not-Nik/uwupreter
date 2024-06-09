@@ -1,0 +1,107 @@
+Program {
+    items: [
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "a",
+                    ),
+                    res: None,
+                },
+                init: Some(
+                    Literal(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+            },
+        ),
+        GlobalVar(
+            VarDef {
+                data_type: Float,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "b",
+                    ),
+                    res: None,
+                },
+                init: Some(
+                    Literal(
+                        Float(
+                            2.2,
+                        ),
+                    ),
+                ),
+            },
+        ),
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "c",
+                    ),
+                    res: None,
+                },
+                init: Some(
+                    Literal(
+                        Int(
+                            5,
+                        ),
+                    ),
+                ),
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "a",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: BinaryOp(
+                                        BinOpExpr {
+                                            op: Div,
+                                            lhs: Var(
+                                                ResIdent {
+                                                    ident: Ident(
+                                                        "b",
+                                                    ),
+                                                    res: None,
+                                                },
+                                            ),
+                                            rhs: Var(
+                                                ResIdent {
+                                                    ident: Ident(
+                                                        "c",
+                                                    ),
+                                                    res: None,
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

@@ -1,0 +1,47 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "x",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                UnaryMinus(
+                                    BinaryOp(
+                                        BinOpExpr {
+                                            op: Sub,
+                                            lhs: UnaryMinus(
+                                                Literal(
+                                                    Int(
+                                                        9223372036854775807,
+                                                    ),
+                                                ),
+                                            ),
+                                            rhs: Literal(
+                                                Int(
+                                                    1,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

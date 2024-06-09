@@ -1,0 +1,8 @@
+// Type of `do-while` condition must be bool.
+
+void main() {
+    // Yes, this is valid syntax.
+    do
+        ;
+    while (0);
+}

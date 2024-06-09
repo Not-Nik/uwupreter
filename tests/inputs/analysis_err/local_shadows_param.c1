@@ -1,0 +1,6 @@
+// Function params and local vars are in the same scope.
+void foo(int x) {
+    int x;
+}
+
+void main() {}

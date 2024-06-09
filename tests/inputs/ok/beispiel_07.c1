@@ -1,0 +1,16 @@
+// Testprogramm aus Testsuite
+
+bool a = true;
+
+float test(int x, int y) {
+    a = (x < y);
+    a = (x > y);
+    a = (x == y);
+    return x + y;
+}
+
+void main() {
+    int a = 1;
+    int b = 2;
+    print(test(a, b));
+}

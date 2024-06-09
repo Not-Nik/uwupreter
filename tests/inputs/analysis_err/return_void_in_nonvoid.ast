@@ -1,0 +1,50 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "nothing",
+                ),
+                params: [],
+                statements: [],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "something",
+                ),
+                params: [],
+                statements: [
+                    Return(
+                        Some(
+                            Call(
+                                FuncCall {
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "nothing",
+                                        ),
+                                        res: None,
+                                    },
+                                    args: [],
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [],
+            },
+        ),
+    ],
+}

@@ -1,0 +1,4 @@
+void main() {
+    print(false < true); // true
+    print(true > false); // true
+}

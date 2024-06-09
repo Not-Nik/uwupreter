@@ -1,0 +1,160 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Float,
+                ident: Ident(
+                    "test",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "a",
+                        ),
+                    },
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "b",
+                        ),
+                    },
+                ],
+                statements: [
+                    Return(
+                        Some(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "a",
+                                            ),
+                                            res: Some(
+                                                DefId(
+                                                    1,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "b",
+                                            ),
+                                            res: Some(
+                                                DefId(
+                                                    2,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "a",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        4,
+                                    ),
+                                ),
+                            },
+                            init: Some(
+                                Literal(
+                                    Int(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "b",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        5,
+                                    ),
+                                ),
+                            },
+                            init: Some(
+                                Literal(
+                                    Int(
+                                        2,
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Call(
+                                FuncCall {
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "test",
+                                        ),
+                                        res: Some(
+                                            DefId(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                    args: [
+                                        Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "a",
+                                                ),
+                                                res: Some(
+                                                    DefId(
+                                                        4,
+                                                    ),
+                                                ),
+                                            },
+                                        ),
+                                        Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "b",
+                                                ),
+                                                res: Some(
+                                                    DefId(
+                                                        5,
+                                                    ),
+                                                ),
+                                            },
+                                        ),
+                                    ],
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

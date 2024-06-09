@@ -1,0 +1,1 @@
+incorrect type for argument 0 in call to `call_me`, expected `int`, found `bool`

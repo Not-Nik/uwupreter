@@ -1,0 +1,38 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "call_me_maybe",
+                                ),
+                                res: None,
+                            },
+                            init: None,
+                        },
+                    ),
+                    Call(
+                        FuncCall {
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "call_me_maybe",
+                                ),
+                                res: None,
+                            },
+                            args: [],
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

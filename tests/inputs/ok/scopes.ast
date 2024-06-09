@@ -1,0 +1,161 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Bool,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "main",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                Literal(
+                                    Bool(
+                                        true,
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                    Block(
+                        Block {
+                            statements: [
+                                VarDef(
+                                    VarDef {
+                                        data_type: Bool,
+                                        res_ident: ResIdent {
+                                            ident: Ident(
+                                                "main",
+                                            ),
+                                            res: None,
+                                        },
+                                        init: Some(
+                                            Var(
+                                                ResIdent {
+                                                    ident: Ident(
+                                                        "main",
+                                                    ),
+                                                    res: None,
+                                                },
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ],
+                        },
+                    ),
+                    For(
+                        ForStmt {
+                            init: VarDef(
+                                VarDef {
+                                    data_type: Bool,
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "main",
+                                        ),
+                                        res: None,
+                                    },
+                                    init: None,
+                                },
+                            ),
+                            cond: Literal(
+                                Bool(
+                                    false,
+                                ),
+                            ),
+                            update: Assign {
+                                lhs: ResIdent {
+                                    ident: Ident(
+                                        "main",
+                                    ),
+                                    res: None,
+                                },
+                                rhs: Literal(
+                                    Bool(
+                                        false,
+                                    ),
+                                ),
+                            },
+                            body: Empty,
+                        },
+                    ),
+                    For(
+                        ForStmt {
+                            init: Assign(
+                                Assign {
+                                    lhs: ResIdent {
+                                        ident: Ident(
+                                            "main",
+                                        ),
+                                        res: None,
+                                    },
+                                    rhs: Literal(
+                                        Bool(
+                                            false,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            cond: Literal(
+                                Bool(
+                                    false,
+                                ),
+                            ),
+                            update: Assign {
+                                lhs: ResIdent {
+                                    ident: Ident(
+                                        "main",
+                                    ),
+                                    res: None,
+                                },
+                                rhs: Literal(
+                                    Bool(
+                                        false,
+                                    ),
+                                ),
+                            },
+                            body: VarDef(
+                                VarDef {
+                                    data_type: Int,
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "main",
+                                        ),
+                                        res: None,
+                                    },
+                                    init: None,
+                                },
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "bar",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "main",
+                        ),
+                    },
+                ],
+                statements: [],
+            },
+        ),
+    ],
+}

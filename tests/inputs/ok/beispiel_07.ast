@@ -1,0 +1,243 @@
+Program {
+    items: [
+        GlobalVar(
+            VarDef {
+                data_type: Bool,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "a",
+                    ),
+                    res: None,
+                },
+                init: Some(
+                    Literal(
+                        Bool(
+                            true,
+                        ),
+                    ),
+                ),
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Float,
+                ident: Ident(
+                    "test",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "x",
+                        ),
+                    },
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "y",
+                        ),
+                    },
+                ],
+                statements: [
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "a",
+                                ),
+                                res: None,
+                            },
+                            rhs: BinaryOp(
+                                BinOpExpr {
+                                    op: Lt,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "x",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "y",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                },
+                            ),
+                        },
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "a",
+                                ),
+                                res: None,
+                            },
+                            rhs: BinaryOp(
+                                BinOpExpr {
+                                    op: Gt,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "x",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "y",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                },
+                            ),
+                        },
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "a",
+                                ),
+                                res: None,
+                            },
+                            rhs: BinaryOp(
+                                BinOpExpr {
+                                    op: Eq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "x",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "y",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                },
+                            ),
+                        },
+                    ),
+                    Return(
+                        Some(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "x",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "y",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "a",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                Literal(
+                                    Int(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "b",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                Literal(
+                                    Int(
+                                        2,
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Call(
+                                FuncCall {
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "test",
+                                        ),
+                                        res: None,
+                                    },
+                                    args: [
+                                        Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "a",
+                                                ),
+                                                res: None,
+                                            },
+                                        ),
+                                        Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "b",
+                                                ),
+                                                res: None,
+                                            },
+                                        ),
+                                    ],
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

@@ -1,0 +1,48 @@
+int count;
+
+int check_while() {
+    count = 0;
+    while ((count = count + 1) > 0) {
+        return 1;
+    }
+    print("after while should be unreachable");
+}
+
+int check_do_while() {
+    do {
+        return 2;
+    } while (false);
+    print("after do-while should be unreachable");
+}
+
+int check_for() {
+    for (count = 0; (count = count + 1) > 0; count = count + 1) {
+        return 3;
+    }
+    print("after for should be unreachable");
+}
+
+void main() {
+    int res = check_while();
+    if (res != 1) {
+        print("wrong return value from while");
+    }
+    if (count != 1) {
+        print("while condition evaluated too often");
+    }
+
+    res = check_do_while();
+    if (res != 2) {
+        print("wrong return value from do-while");
+    }
+
+    res = check_for();
+    if (res != 3) {
+        print("wrong return value from for");
+    }
+    if (count != 1) {
+        print("for condition or update evaluated too often");
+    }
+
+    print("done");
+}

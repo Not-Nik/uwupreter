@@ -1,0 +1,6 @@
+// Type of `for` condition must be bool.
+
+void main() {
+    for (int i = 0; i; i = i + 1)
+        ;
+}

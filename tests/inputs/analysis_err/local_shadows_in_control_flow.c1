@@ -1,0 +1,8 @@
+// `while` loops do not create a scope.
+void foo() {
+    int x;
+    while (false)
+        int x;
+}
+
+void main() {}

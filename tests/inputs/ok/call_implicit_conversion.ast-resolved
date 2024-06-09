@@ -1,0 +1,80 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "call_me",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Float,
+                        ident: Ident(
+                            "f",
+                        ),
+                    },
+                ],
+                statements: [
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Div,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "f",
+                                            ),
+                                            res: Some(
+                                                DefId(
+                                                    1,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            2,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Call(
+                        FuncCall {
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "call_me",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        0,
+                                    ),
+                                ),
+                            },
+                            args: [
+                                Literal(
+                                    Int(
+                                        41,
+                                    ),
+                                ),
+                            ],
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

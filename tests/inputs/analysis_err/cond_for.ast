@@ -1,0 +1,72 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    For(
+                        ForStmt {
+                            init: VarDef(
+                                VarDef {
+                                    data_type: Int,
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "i",
+                                        ),
+                                        res: None,
+                                    },
+                                    init: Some(
+                                        Literal(
+                                            Int(
+                                                0,
+                                            ),
+                                        ),
+                                    ),
+                                },
+                            ),
+                            cond: Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: None,
+                                },
+                            ),
+                            update: Assign {
+                                lhs: ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: None,
+                                },
+                                rhs: BinaryOp(
+                                    BinOpExpr {
+                                        op: Add,
+                                        lhs: Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "i",
+                                                ),
+                                                res: None,
+                                            },
+                                        ),
+                                        rhs: Literal(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            },
+                            body: Empty,
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

@@ -1,0 +1,6 @@
+// Type of `while` condition must be bool.
+
+void main() {
+    while (0)
+        ;
+}

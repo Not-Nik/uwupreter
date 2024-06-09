@@ -1,0 +1,57 @@
+//! The C1 parser, implemented with the parser generator LALRPOP.
+
+use crate::{ast, lexer::{LexicalError}, token::Token};
+
+grammar;
+
+extern {
+    type Location = usize;
+    type Error = LexicalError;
+
+    enum Token {
+        "bool" => Token::KwBool,
+        "do" => Token::KwDo,
+        "else" => Token::KwElse,
+        "float" => Token::KwFloat,
+        "for" => Token::KwFor,
+        "if" => Token::KwIf,
+        "int" => Token::KwInt,
+        "print" => Token::KwPrint,
+        "return" => Token::KwReturn,
+        "void" => Token::KwVoid,
+        "while" => Token::KwWhile,
+        "+" => Token::Add,
+        "-" => Token::Sub,
+        "*" => Token::Mul,
+        "/" => Token::Div,
+        "=" => Token::Assign,
+        "==" => Token::Eq,
+        "!=" => Token::Neq,
+        "<" => Token::Lt,
+        ">" => Token::Gt,
+        "<=" => Token::Leq,
+        ">=" => Token::Geq,
+        "&&" => Token::LogAnd,
+        "||" => Token::LogOr,
+        "," => Token::Comma,
+        ";" => Token::Semicolon,
+        "(" => Token::LParen,
+        ")" => Token::RParen,
+        "{" => Token::LBrace,
+        "}" => Token::RBrace,
+
+        "int_literal" => Token::IntLiteral(<i64>),
+        "float_literal" => Token::FloatLiteral(<f64>),
+        "bool_literal" => Token::BoolLiteral(<bool>),
+        "string_literal" => Token::StringLiteral(<String>),
+
+        "ident" => Token::Ident(<String>),
+    }
+}
+
+// top-level grammar rule
+pub Program: ast::Program = {
+    Item* => ast::Program { items: <> }
+};
+
+Item: ast::Item = {};

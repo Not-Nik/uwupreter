@@ -1,0 +1,31 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "no",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Void,
+                        ident: Ident(
+                            "no",
+                        ),
+                    },
+                ],
+                statements: [],
+            },
+        ),
+    ],
+}

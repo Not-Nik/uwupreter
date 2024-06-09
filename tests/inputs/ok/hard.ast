@@ -1,0 +1,436 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "ackermann",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "m",
+                        ),
+                    },
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "n",
+                        ),
+                    },
+                ],
+                statements: [
+                    If(
+                        IfStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Eq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "m",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            0,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_true: Return(
+                                Some(
+                                    BinaryOp(
+                                        BinOpExpr {
+                                            op: Add,
+                                            lhs: Var(
+                                                ResIdent {
+                                                    ident: Ident(
+                                                        "n",
+                                                    ),
+                                                    res: None,
+                                                },
+                                            ),
+                                            rhs: Literal(
+                                                Int(
+                                                    1,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                ),
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    If(
+                        IfStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Eq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "n",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            0,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_true: Return(
+                                Some(
+                                    Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "ackermann",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                BinaryOp(
+                                                    BinOpExpr {
+                                                        op: Sub,
+                                                        lhs: Var(
+                                                            ResIdent {
+                                                                ident: Ident(
+                                                                    "m",
+                                                                ),
+                                                                res: None,
+                                                            },
+                                                        ),
+                                                        rhs: Literal(
+                                                            Int(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    },
+                                                ),
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                ),
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    Return(
+                        Some(
+                            Call(
+                                FuncCall {
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "ackermann",
+                                        ),
+                                        res: None,
+                                    },
+                                    args: [
+                                        BinaryOp(
+                                            BinOpExpr {
+                                                op: Sub,
+                                                lhs: Var(
+                                                    ResIdent {
+                                                        ident: Ident(
+                                                            "m",
+                                                        ),
+                                                        res: None,
+                                                    },
+                                                ),
+                                                rhs: Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            },
+                                        ),
+                                        Call(
+                                            FuncCall {
+                                                res_ident: ResIdent {
+                                                    ident: Ident(
+                                                        "ackermann",
+                                                    ),
+                                                    res: None,
+                                                },
+                                                args: [
+                                                    Var(
+                                                        ResIdent {
+                                                            ident: Ident(
+                                                                "m",
+                                                            ),
+                                                            res: None,
+                                                        },
+                                                    ),
+                                                    BinaryOp(
+                                                        BinOpExpr {
+                                                            op: Sub,
+                                                            lhs: Var(
+                                                                ResIdent {
+                                                                    ident: Ident(
+                                                                        "n",
+                                                                    ),
+                                                                    res: None,
+                                                                },
+                                                            ),
+                                                            rhs: Literal(
+                                                                Int(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                ],
+                                            },
+                                        ),
+                                    ],
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    For(
+                        ForStmt {
+                            init: VarDef(
+                                VarDef {
+                                    data_type: Int,
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "m",
+                                        ),
+                                        res: None,
+                                    },
+                                    init: Some(
+                                        Literal(
+                                            Int(
+                                                0,
+                                            ),
+                                        ),
+                                    ),
+                                },
+                            ),
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Leq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "m",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            3,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            update: Assign {
+                                lhs: ResIdent {
+                                    ident: Ident(
+                                        "m",
+                                    ),
+                                    res: None,
+                                },
+                                rhs: BinaryOp(
+                                    BinOpExpr {
+                                        op: Add,
+                                        lhs: Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "m",
+                                                ),
+                                                res: None,
+                                            },
+                                        ),
+                                        rhs: Literal(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            },
+                            body: Block(
+                                Block {
+                                    statements: [
+                                        For(
+                                            ForStmt {
+                                                init: VarDef(
+                                                    VarDef {
+                                                        data_type: Int,
+                                                        res_ident: ResIdent {
+                                                            ident: Ident(
+                                                                "n",
+                                                            ),
+                                                            res: None,
+                                                        },
+                                                        init: Some(
+                                                            Literal(
+                                                                Int(
+                                                                    0,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    },
+                                                ),
+                                                cond: BinaryOp(
+                                                    BinOpExpr {
+                                                        op: Lt,
+                                                        lhs: Var(
+                                                            ResIdent {
+                                                                ident: Ident(
+                                                                    "n",
+                                                                ),
+                                                                res: None,
+                                                            },
+                                                        ),
+                                                        rhs: BinaryOp(
+                                                            BinOpExpr {
+                                                                op: Sub,
+                                                                lhs: Literal(
+                                                                    Int(
+                                                                        6,
+                                                                    ),
+                                                                ),
+                                                                rhs: Var(
+                                                                    ResIdent {
+                                                                        ident: Ident(
+                                                                            "m",
+                                                                        ),
+                                                                        res: None,
+                                                                    },
+                                                                ),
+                                                            },
+                                                        ),
+                                                    },
+                                                ),
+                                                update: Assign {
+                                                    lhs: ResIdent {
+                                                        ident: Ident(
+                                                            "n",
+                                                        ),
+                                                        res: None,
+                                                    },
+                                                    rhs: BinaryOp(
+                                                        BinOpExpr {
+                                                            op: Add,
+                                                            lhs: Var(
+                                                                ResIdent {
+                                                                    ident: Ident(
+                                                                        "n",
+                                                                    ),
+                                                                    res: None,
+                                                                },
+                                                            ),
+                                                            rhs: Literal(
+                                                                Int(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                },
+                                                body: Block(
+                                                    Block {
+                                                        statements: [
+                                                            Print(
+                                                                String(
+                                                                    "---",
+                                                                ),
+                                                            ),
+                                                            Print(
+                                                                Expr(
+                                                                    Var(
+                                                                        ResIdent {
+                                                                            ident: Ident(
+                                                                                "m",
+                                                                            ),
+                                                                            res: None,
+                                                                        },
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                            Print(
+                                                                Expr(
+                                                                    Var(
+                                                                        ResIdent {
+                                                                            ident: Ident(
+                                                                                "n",
+                                                                            ),
+                                                                            res: None,
+                                                                        },
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                            Print(
+                                                                Expr(
+                                                                    Call(
+                                                                        FuncCall {
+                                                                            res_ident: ResIdent {
+                                                                                ident: Ident(
+                                                                                    "ackermann",
+                                                                                ),
+                                                                                res: None,
+                                                                            },
+                                                                            args: [
+                                                                                Var(
+                                                                                    ResIdent {
+                                                                                        ident: Ident(
+                                                                                            "m",
+                                                                                        ),
+                                                                                        res: None,
+                                                                                    },
+                                                                                ),
+                                                                                Var(
+                                                                                    ResIdent {
+                                                                                        ident: Ident(
+                                                                                            "n",
+                                                                                        ),
+                                                                                        res: None,
+                                                                                    },
+                                                                                ),
+                                                                            ],
+                                                                        },
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ],
+                                                    },
+                                                ),
+                                            },
+                                        ),
+                                    ],
+                                },
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

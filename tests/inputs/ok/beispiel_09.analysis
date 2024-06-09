@@ -1,0 +1,65 @@
+ProgramAnalysis {
+    definitions: Definitions {
+        definitions: [
+            GlobalVar(
+                GlobalVarAnalysis {
+                    item_id: ItemId(
+                        0,
+                    ),
+                    global_var_index: 0,
+                    data_type: Int,
+                },
+            ),
+            GlobalVar(
+                GlobalVarAnalysis {
+                    item_id: ItemId(
+                        1,
+                    ),
+                    global_var_index: 1,
+                    data_type: Float,
+                },
+            ),
+            GlobalVar(
+                GlobalVarAnalysis {
+                    item_id: ItemId(
+                        2,
+                    ),
+                    global_var_index: 2,
+                    data_type: Int,
+                },
+            ),
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        3,
+                    ),
+                    return_type: Void,
+                    param_count: 0,
+                    local_vars: [],
+                },
+            ),
+        ],
+    },
+    global_vars: [
+        GlobalVarId(
+            DefId(
+                0,
+            ),
+        ),
+        GlobalVarId(
+            DefId(
+                1,
+            ),
+        ),
+        GlobalVarId(
+            DefId(
+                2,
+            ),
+        ),
+    ],
+    main_func: FuncId(
+        DefId(
+            3,
+        ),
+    ),
+}

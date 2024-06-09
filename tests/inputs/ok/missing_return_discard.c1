@@ -1,0 +1,7 @@
+// If the return value is discarded, then reaching the end of a non-void
+// function is fine.
+
+int foo() {}
+void main() {
+    foo();
+}

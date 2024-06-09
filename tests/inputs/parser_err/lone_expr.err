@@ -1,0 +1,2 @@
+Unrecognized token `1` found at 18:19
+Expected one of ";", "bool", "do", "float", "for", "ident", "if", "int", "print", "return", "void", "while", "{" or "}"

@@ -1,0 +1,34 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: LogAnd,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

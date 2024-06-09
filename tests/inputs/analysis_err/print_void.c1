@@ -1,0 +1,5 @@
+void nothing() {}
+
+void main() {
+    print(nothing());
+}

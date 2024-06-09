@@ -1,0 +1,34 @@
+ProgramAnalysis {
+    definitions: Definitions {
+        definitions: [
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        0,
+                    ),
+                    return_type: Void,
+                    param_count: 0,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                1,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Int,
+                },
+            ),
+        ],
+    },
+    global_vars: [],
+    main_func: FuncId(
+        DefId(
+            0,
+        ),
+    ),
+}

@@ -1,0 +1,9 @@
+// Call statements discard the result value.
+
+int answer() {
+    return 42;
+}
+
+void main() {
+    answer(); // forgor 💀
+}

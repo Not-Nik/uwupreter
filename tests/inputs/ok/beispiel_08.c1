@@ -1,0 +1,42 @@
+// Testprogramm aus Testsuite
+
+bool a = true;
+
+float test(int x, int y) {
+    if (a) {
+        return 1;
+    }
+
+    if (a == true) {
+        return 2;
+    } else {
+        return 3;
+    }
+
+    for (int i = 0; i < 5; i = i + 1) {
+        x = x + 1;
+    }
+
+    int j = 0;
+    for (j = 0; j < 7; j = j + 1) {
+        x = x * 2;
+    }
+
+    while (j < 10) {
+        x = x - 1;
+        j = j + 1;
+    }
+
+    do {
+        x = x / 2;
+        j = j + 1;
+    } while (j < 20);
+
+    return x;
+}
+
+void main() {
+    int a = 1;
+    int b = 2;
+    print(test(a, b));
+}

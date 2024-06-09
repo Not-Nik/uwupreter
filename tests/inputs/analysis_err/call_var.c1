@@ -1,0 +1,4 @@
+void main() {
+    int call_me_maybe;
+    call_me_maybe();
+}

@@ -1,0 +1,10 @@
+void main() {
+    bool main = true;
+    { bool main = main; }
+    // `for`-loops create a new scope, but `if`/`while` do not
+    for (bool main; false; main = false)
+        ;
+    for (main = false; false; main = false)
+        int main;
+}
+void bar(int main) {}

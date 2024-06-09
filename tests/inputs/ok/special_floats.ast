@@ -1,0 +1,187 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Float,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "pos_inf",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                BinaryOp(
+                                    BinOpExpr {
+                                        op: Div,
+                                        lhs: Literal(
+                                            Float(
+                                                1.0,
+                                            ),
+                                        ),
+                                        rhs: Literal(
+                                            Int(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                        },
+                    ),
+                    VarDef(
+                        VarDef {
+                            data_type: Float,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "neg_inf",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                BinaryOp(
+                                    BinOpExpr {
+                                        op: Div,
+                                        lhs: UnaryMinus(
+                                            Literal(
+                                                Float(
+                                                    1.0,
+                                                ),
+                                            ),
+                                        ),
+                                        rhs: Literal(
+                                            Int(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                        },
+                    ),
+                    VarDef(
+                        VarDef {
+                            data_type: Float,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "nan",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                BinaryOp(
+                                    BinOpExpr {
+                                        op: Div,
+                                        lhs: Literal(
+                                            Float(
+                                                0.0,
+                                            ),
+                                        ),
+                                        rhs: Literal(
+                                            Int(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "pos_inf",
+                                    ),
+                                    res: None,
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "neg_inf",
+                                    ),
+                                    res: None,
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "nan",
+                                    ),
+                                    res: None,
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Eq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "nan",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "nan",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "nan",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "nan",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

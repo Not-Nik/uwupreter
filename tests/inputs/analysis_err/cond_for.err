@@ -1,0 +1,1 @@
+condition of for loop must have type `bool`, found `int`

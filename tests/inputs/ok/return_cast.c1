@@ -1,0 +1,9 @@
+// Test int-to-float casts for return statements.
+
+float get() {
+    return 1;
+}
+
+void main() {
+    print(get() / 2); // 0.5
+}

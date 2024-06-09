@@ -1,0 +1,1 @@
+cannot apply binary operator to incompatible types: `int + bool`

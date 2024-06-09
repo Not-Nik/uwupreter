@@ -1,0 +1,210 @@
+ProgramAnalysis {
+    definitions: Definitions {
+        definitions: [
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        0,
+                    ),
+                    return_type: Bool,
+                    param_count: 1,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                1,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Bool,
+                },
+            ),
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        1,
+                    ),
+                    return_type: Bool,
+                    param_count: 2,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                3,
+                            ),
+                        ),
+                        LocalVarId(
+                            DefId(
+                                4,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Bool,
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 1,
+                    data_type: Bool,
+                },
+            ),
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        2,
+                    ),
+                    return_type: Bool,
+                    param_count: 2,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                6,
+                            ),
+                        ),
+                        LocalVarId(
+                            DefId(
+                                7,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Bool,
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 1,
+                    data_type: Bool,
+                },
+            ),
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        3,
+                    ),
+                    return_type: Bool,
+                    param_count: 2,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                9,
+                            ),
+                        ),
+                        LocalVarId(
+                            DefId(
+                                10,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Bool,
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 1,
+                    data_type: Bool,
+                },
+            ),
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        4,
+                    ),
+                    return_type: Bool,
+                    param_count: 2,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                12,
+                            ),
+                        ),
+                        LocalVarId(
+                            DefId(
+                                13,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Bool,
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 1,
+                    data_type: Bool,
+                },
+            ),
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        5,
+                    ),
+                    return_type: Void,
+                    param_count: 0,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                15,
+                            ),
+                        ),
+                        LocalVarId(
+                            DefId(
+                                16,
+                            ),
+                        ),
+                        LocalVarId(
+                            DefId(
+                                17,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Bool,
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 1,
+                    data_type: Bool,
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 2,
+                    data_type: Int,
+                },
+            ),
+        ],
+    },
+    global_vars: [],
+    main_func: FuncId(
+        DefId(
+            14,
+        ),
+    ),
+}

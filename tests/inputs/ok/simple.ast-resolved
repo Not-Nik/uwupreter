@@ -1,0 +1,119 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    For(
+                        ForStmt {
+                            init: VarDef(
+                                VarDef {
+                                    data_type: Int,
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "a",
+                                        ),
+                                        res: Some(
+                                            DefId(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                    init: Some(
+                                        Literal(
+                                            Int(
+                                                0,
+                                            ),
+                                        ),
+                                    ),
+                                },
+                            ),
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Leq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "a",
+                                            ),
+                                            res: Some(
+                                                DefId(
+                                                    1,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            3,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            update: Assign {
+                                lhs: ResIdent {
+                                    ident: Ident(
+                                        "a",
+                                    ),
+                                    res: Some(
+                                        DefId(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                                rhs: BinaryOp(
+                                    BinOpExpr {
+                                        op: Add,
+                                        lhs: Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "a",
+                                                ),
+                                                res: Some(
+                                                    DefId(
+                                                        1,
+                                                    ),
+                                                ),
+                                            },
+                                        ),
+                                        rhs: Literal(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            },
+                            body: Block(
+                                Block {
+                                    statements: [
+                                        Print(
+                                            Expr(
+                                                Var(
+                                                    ResIdent {
+                                                        ident: Ident(
+                                                            "a",
+                                                        ),
+                                                        res: Some(
+                                                            DefId(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    },
+                                                ),
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

@@ -1,0 +1,348 @@
+//****************************************************//
+//* --- Small C1 Testprogramm by Dustin Hebecker --- *//
+//* Feel free to distribute with this header intact. *//
+//* Feel free to modify and extend the code.		 *//
+//****************************************************//
+
+// Seed for RNG
+int RANDSEED = 5001;
+
+// Largest integer value
+int MAX_INT = 2147483647;
+
+// Smallest integer value
+int MIN_INT = -MAX_INT - 1;
+
+// Global value for PI
+float PI = 3.1415926;
+
+// Factorial function
+int factorial(int n)
+{
+	if ((n <= 1) && (n > -1))
+	{
+		return 1;
+	}
+	if (n < 0)
+	{
+		return -1;
+	}
+	return n * factorial(n - 1);
+}
+
+// Determine the absolute value
+float abs(float val)
+{
+	if (val > 0)
+		return val;
+	return -val;
+}
+
+// Exponential function
+float exp(float x)
+{
+	float ratio = 1;
+	float result = 1;
+	float resultOld = 0;
+	int n = 0;
+	while (abs(result / resultOld - 1) > 1e-5)
+	{
+		n = n + 1;
+		resultOld = result;
+		ratio = ratio * x / n;
+		result = result + ratio;
+	}
+	return result;
+}
+
+// Natural logarithm
+float ln(float x)
+{
+	if (x < 0.5)
+	{
+		return x;
+	}
+	int j;
+	float sum = 0.0;
+	float oldSum = 1;
+	float power;
+	for (int i = 1; abs(sum / oldSum - 1) > 1e-5; i = i + 1)
+	{
+		oldSum = sum;
+		power = 1.0;
+		for (int j = 0; j < i; j = j + 1)
+		{
+			power = power * ((x - 1.0) / x);
+		}
+		sum = sum + (1.0 / i) * power;
+	}
+	return sum;
+}
+
+// Logarithm to base b
+float log(float x, float b)
+{
+	return ln(x) / ln(b);
+}
+
+// x^n for real x and n
+float pow(float x, float n)
+{
+	return exp(ln(x) * n);
+}
+
+// Square root function
+float sqrt(float x)
+{
+	return exp(ln(x) * 0.5);
+}
+
+// x^n with x real and n a natural number
+float power(float x, int n)
+{
+	if (n < 0)
+	{
+		return -1;
+	}
+	float result = 1;
+	for (int i = 0; i < n; i = i + 1)
+	{
+		result = result * x;
+	}
+	return result;
+}
+
+// sine function
+float sin(float x)
+{
+	while (x >= 2 * PI)
+	{
+		x = x - (2 * PI);
+	}
+	while (x < 0)
+	{
+		x = x + 2 * PI;
+	}
+	int correction = 1;
+	if (x > PI)
+	{
+		x = x - PI;
+		correction = -1;
+	}
+	if (x >= PI / 2.0)
+	{
+		x = PI - x;
+	}
+	float result = x;
+	float oldResult = -3 * PI;
+	float ratio = x;
+	for (int i = 3; abs(result / oldResult - 1) > 1e-5; i = i + 2)
+	{
+		oldResult = result;
+		ratio = -ratio * x * x / (i * (i - 1));
+		result = result + ratio;
+	}
+	return correction * result;
+}
+
+// cosine function
+float cos(float x)
+{
+	return sin(PI / 2.0 - x);
+}
+
+// tangent function
+float tan(float x)
+{
+	float cosine = cos(x);
+	float sine = sin(x);
+	if (cosine != 0)
+	{
+		return sine / cosine;
+	}
+	return -1;
+}
+
+// Converts a float to an integer while rounding down
+int float2Int(float x)
+{
+	int returnval;
+	if (x > MAX_INT)
+	{
+		return MAX_INT;
+	}
+	if (x < MIN_INT)
+	{
+		return MIN_INT;
+	}
+	if (x > 0)
+	{
+		returnval = 2;
+		while (x > returnval)
+		{
+			returnval = returnval * 2;
+		}
+		while (x < returnval)
+		{
+			returnval = returnval - 1;
+		}
+	}
+	else
+	{
+		returnval = -2;
+		while (x < returnval)
+		{
+			returnval = returnval * 2;
+		}
+		while (x > returnval)
+		{
+			returnval = returnval + 1;
+		}
+	}
+	return returnval;
+}
+
+// modulo function
+int modulo(int a, int b)
+{
+	return a - ((a / b) * b);
+}
+
+// Random integer Number generator [0,16383]
+int rand()
+{
+	RANDSEED = modulo(13125 * RANDSEED + 12345, 16384);
+	return RANDSEED;
+}
+
+// Random number generator [0,1)
+float random()
+{
+	float number = rand();
+	return number / 16384.0;
+}
+
+/*Additional Function ideas
+fft?
+matrix (pointer?)
+neural network?
+chess game
+*/
+
+// Helper function to compare float values
+void printResults(float calculated, float expected)
+{
+	print("Result:");
+	print(calculated);
+	print("Expected:");
+	print(expected);
+	print("-----");
+	return;
+}
+
+// Helper function to compare int values
+void printResultsI(int calculated, int expected)
+{
+	print("Result:");
+	print(calculated);
+	print("Expected:");
+	print(expected);
+	print("-----");
+	return;
+}
+
+void main()
+{
+
+	print("This is a small sample programm for tests in c1");
+	print("        ----(c) Dustin Hebecker----");
+
+	int aInt = 10;
+	float aFloat = 54.3;
+
+	print("-----");
+	print("Local Variable Int");
+	printResultsI(aInt, 10);
+
+	print("-----");
+	print("Local Variable Float");
+	printResults(aFloat, 54.3);
+
+	print("-----");
+	print("Global Variable Int");
+	printResultsI(RANDSEED, 5001);
+
+	print("-----");
+	print("Global Variable Float");
+	printResults(PI, 3.1415926);
+
+	print("-----");
+	print("Factorial Function (10!)");
+	printResultsI(factorial(aInt), 3628800);
+
+	print("-----");
+	print("Absolute value (-13)");
+	printResultsI(float2Int(abs(aInt * 13 / -10.0)), 13);
+
+	print("-----");
+	print("(e)");
+	printResults(exp(1.0), 2.718281828);
+
+	print("-----");
+	print("(e^PI)");
+	printResults(exp(PI), 23.140691393);
+
+	print("-----");
+	print("(5.43^10)");
+	printResults(power(aFloat / aInt, aInt), 22284264.052158874);
+
+	print("-----");
+	print("(5.43^5.43)");
+	printResults(pow(aFloat / aInt, aFloat / aInt), 9771.541361438);
+
+	print("-----");
+	print("Ln(e)");
+	printResults(ln(exp(1.0)), 1.0);
+
+	print("-----");
+	print("Log(100,base=10)");
+	printResults(log(aInt * aInt * 1.0, aInt * 1.0), 2.0);
+
+	print("-----");
+	print("sin(3/2 PI)");
+	printResults(sin(3 * PI / 2), -1.0);
+
+	print("-----");
+	print("cos(3/2 PI)");
+	printResults(cos(PI * 3 / 2), 0.0);
+
+	print("-----");
+	print("tan(PI/3)");
+	printResults(tan(PI / 3.0), 1.7305080757);
+
+	print("-----");
+	print("sqrt(25)");
+	printResults(sqrt(25.0), 5.0);
+
+	print("-----");
+	print("MaxInt");
+	printResultsI(MAX_INT, 2147483647);
+
+	print("-----");
+	print("float2Int(54.3)");
+	printResultsI(float2Int(aFloat), 54);
+
+	print("-----");
+	print("14 Modulo 6");
+	printResultsI(modulo(14, 6), 2);
+
+	print("-----");
+	print("(Pseudo) Random int [0,16383]");
+	printResultsI(rand(), 16166);
+
+	print("-----");
+	print("Random float [0,1)");
+	printResults(random(), 0.116638);
+
+	print("Done :)");
+}

@@ -1,0 +1,7 @@
+// Attempting to use the return value of a function that did not return a value
+// is undefined behavior.
+
+int foo() {}
+void main() {
+    int x = foo();
+}

@@ -1,0 +1,50 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "answer",
+                ),
+                params: [],
+                statements: [
+                    Return(
+                        Some(
+                            Literal(
+                                Int(
+                                    42,
+                                ),
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Call(
+                        FuncCall {
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "answer",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        0,
+                                    ),
+                                ),
+                            },
+                            args: [],
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

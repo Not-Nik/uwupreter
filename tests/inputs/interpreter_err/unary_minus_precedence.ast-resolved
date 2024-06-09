@@ -1,0 +1,48 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Div,
+                                    lhs: UnaryMinus(
+                                        BinaryOp(
+                                            BinOpExpr {
+                                                op: Sub,
+                                                lhs: UnaryMinus(
+                                                    Literal(
+                                                        Int(
+                                                            9223372036854775807,
+                                                        ),
+                                                    ),
+                                                ),
+                                                rhs: Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            },
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            2,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

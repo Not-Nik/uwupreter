@@ -1,0 +1,60 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Float,
+                ident: Ident(
+                    "get",
+                ),
+                params: [],
+                statements: [
+                    Return(
+                        Some(
+                            Literal(
+                                Int(
+                                    1,
+                                ),
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Div,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "get",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [],
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            2,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

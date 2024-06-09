@@ -1,0 +1,57 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "foo",
+                ),
+                params: [],
+                statements: [],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "x",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        2,
+                                    ),
+                                ),
+                            },
+                            init: Some(
+                                Call(
+                                    FuncCall {
+                                        res_ident: ResIdent {
+                                            ident: Ident(
+                                                "foo",
+                                            ),
+                                            res: Some(
+                                                DefId(
+                                                    0,
+                                                ),
+                                            ),
+                                        },
+                                        args: [],
+                                    },
+                                ),
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

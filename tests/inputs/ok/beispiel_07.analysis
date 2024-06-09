@@ -1,0 +1,93 @@
+ProgramAnalysis {
+    definitions: Definitions {
+        definitions: [
+            GlobalVar(
+                GlobalVarAnalysis {
+                    item_id: ItemId(
+                        0,
+                    ),
+                    global_var_index: 0,
+                    data_type: Bool,
+                },
+            ),
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        1,
+                    ),
+                    return_type: Float,
+                    param_count: 2,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                2,
+                            ),
+                        ),
+                        LocalVarId(
+                            DefId(
+                                3,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Int,
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 1,
+                    data_type: Int,
+                },
+            ),
+            Func(
+                FuncAnalysis {
+                    item_id: ItemId(
+                        2,
+                    ),
+                    return_type: Void,
+                    param_count: 0,
+                    local_vars: [
+                        LocalVarId(
+                            DefId(
+                                5,
+                            ),
+                        ),
+                        LocalVarId(
+                            DefId(
+                                6,
+                            ),
+                        ),
+                    ],
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 0,
+                    data_type: Int,
+                },
+            ),
+            LocalVar(
+                LocalVarAnalysis {
+                    local_var_index: 1,
+                    data_type: Int,
+                },
+            ),
+        ],
+    },
+    global_vars: [
+        GlobalVarId(
+            DefId(
+                0,
+            ),
+        ),
+    ],
+    main_func: FuncId(
+        DefId(
+            4,
+        ),
+    ),
+}

@@ -1,0 +1,9 @@
+// Implicit conversions for function calls.
+
+void call_me(float f) {
+    print(f/2);
+}
+
+void main() {
+    call_me(41);
+}

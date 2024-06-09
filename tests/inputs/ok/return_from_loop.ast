@@ -1,0 +1,510 @@
+Program {
+    items: [
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "count",
+                    ),
+                    res: None,
+                },
+                init: None,
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "check_while",
+                ),
+                params: [],
+                statements: [
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "count",
+                                ),
+                                res: None,
+                            },
+                            rhs: Literal(
+                                Int(
+                                    0,
+                                ),
+                            ),
+                        },
+                    ),
+                    While(
+                        WhileStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Gt,
+                                    lhs: Assign(
+                                        Assign {
+                                            lhs: ResIdent {
+                                                ident: Ident(
+                                                    "count",
+                                                ),
+                                                res: None,
+                                            },
+                                            rhs: BinaryOp(
+                                                BinOpExpr {
+                                                    op: Add,
+                                                    lhs: Var(
+                                                        ResIdent {
+                                                            ident: Ident(
+                                                                "count",
+                                                            ),
+                                                            res: None,
+                                                        },
+                                                    ),
+                                                    rhs: Literal(
+                                                        Int(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            0,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            body: Block(
+                                Block {
+                                    statements: [
+                                        Return(
+                                            Some(
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                        },
+                    ),
+                    Print(
+                        String(
+                            "after while should be unreachable",
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "check_do_while",
+                ),
+                params: [],
+                statements: [
+                    DoWhile(
+                        WhileStmt {
+                            cond: Literal(
+                                Bool(
+                                    false,
+                                ),
+                            ),
+                            body: Block(
+                                Block {
+                                    statements: [
+                                        Return(
+                                            Some(
+                                                Literal(
+                                                    Int(
+                                                        2,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                        },
+                    ),
+                    Print(
+                        String(
+                            "after do-while should be unreachable",
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "check_for",
+                ),
+                params: [],
+                statements: [
+                    For(
+                        ForStmt {
+                            init: Assign(
+                                Assign {
+                                    lhs: ResIdent {
+                                        ident: Ident(
+                                            "count",
+                                        ),
+                                        res: None,
+                                    },
+                                    rhs: Literal(
+                                        Int(
+                                            0,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Gt,
+                                    lhs: Assign(
+                                        Assign {
+                                            lhs: ResIdent {
+                                                ident: Ident(
+                                                    "count",
+                                                ),
+                                                res: None,
+                                            },
+                                            rhs: BinaryOp(
+                                                BinOpExpr {
+                                                    op: Add,
+                                                    lhs: Var(
+                                                        ResIdent {
+                                                            ident: Ident(
+                                                                "count",
+                                                            ),
+                                                            res: None,
+                                                        },
+                                                    ),
+                                                    rhs: Literal(
+                                                        Int(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            0,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            update: Assign {
+                                lhs: ResIdent {
+                                    ident: Ident(
+                                        "count",
+                                    ),
+                                    res: None,
+                                },
+                                rhs: BinaryOp(
+                                    BinOpExpr {
+                                        op: Add,
+                                        lhs: Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "count",
+                                                ),
+                                                res: None,
+                                            },
+                                        ),
+                                        rhs: Literal(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            },
+                            body: Block(
+                                Block {
+                                    statements: [
+                                        Return(
+                                            Some(
+                                                Literal(
+                                                    Int(
+                                                        3,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                        },
+                    ),
+                    Print(
+                        String(
+                            "after for should be unreachable",
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "res",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                Call(
+                                    FuncCall {
+                                        res_ident: ResIdent {
+                                            ident: Ident(
+                                                "check_while",
+                                            ),
+                                            res: None,
+                                        },
+                                        args: [],
+                                    },
+                                ),
+                            ),
+                        },
+                    ),
+                    If(
+                        IfStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "res",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_true: Block(
+                                Block {
+                                    statements: [
+                                        Print(
+                                            String(
+                                                "wrong return value from while",
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    If(
+                        IfStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "count",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_true: Block(
+                                Block {
+                                    statements: [
+                                        Print(
+                                            String(
+                                                "while condition evaluated too often",
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "res",
+                                ),
+                                res: None,
+                            },
+                            rhs: Call(
+                                FuncCall {
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "check_do_while",
+                                        ),
+                                        res: None,
+                                    },
+                                    args: [],
+                                },
+                            ),
+                        },
+                    ),
+                    If(
+                        IfStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "res",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            2,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_true: Block(
+                                Block {
+                                    statements: [
+                                        Print(
+                                            String(
+                                                "wrong return value from do-while",
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "res",
+                                ),
+                                res: None,
+                            },
+                            rhs: Call(
+                                FuncCall {
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "check_for",
+                                        ),
+                                        res: None,
+                                    },
+                                    args: [],
+                                },
+                            ),
+                        },
+                    ),
+                    If(
+                        IfStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "res",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            3,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_true: Block(
+                                Block {
+                                    statements: [
+                                        Print(
+                                            String(
+                                                "wrong return value from for",
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    If(
+                        IfStmt {
+                            cond: BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "count",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_true: Block(
+                                Block {
+                                    statements: [
+                                        Print(
+                                            String(
+                                                "for condition or update evaluated too often",
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    Print(
+                        String(
+                            "done",
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

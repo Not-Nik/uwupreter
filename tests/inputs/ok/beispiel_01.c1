@@ -1,0 +1,33 @@
+int blub() {
+    int blub1 = 23;
+    int blub2 = 17;
+    int blub3 = 42;
+    int blub4 = blub1 * (blub2 + blub3);
+    if (blub1 < blub4)
+        return blub2;
+    return blub3;
+}
+
+float blah() {
+    int a = 1;
+    int b = 2;
+    if (a < blub()) {
+        if (b > blub()) {
+            print(blub() + blub());
+        }
+    }
+    return 3.14159;
+}
+
+void main() {
+    int a = 1;
+    int b = 2;
+
+    if (a <= b)
+        print(a + b);
+    if (a >= b)
+        print(a - b);
+
+    print(blub());
+    print(blah());
+}

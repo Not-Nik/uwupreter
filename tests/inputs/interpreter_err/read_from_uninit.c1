@@ -1,0 +1,6 @@
+// Reading an uninitialized variable is undefined behavior.
+
+void main() {
+    int x;
+    int y = x;
+}

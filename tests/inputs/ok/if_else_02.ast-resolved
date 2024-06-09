@@ -1,0 +1,48 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    If(
+                        IfStmt {
+                            cond: Literal(
+                                Bool(
+                                    true,
+                                ),
+                            ),
+                            if_true: Block(
+                                Block {
+                                    statements: [
+                                        Print(
+                                            String(
+                                                "then",
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                            if_false: Some(
+                                Block(
+                                    Block {
+                                        statements: [
+                                            Print(
+                                                String(
+                                                    "else",
+                                                ),
+                                            ),
+                                        ],
+                                    },
+                                ),
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

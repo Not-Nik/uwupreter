@@ -1,0 +1,16 @@
+Program {
+    items: [
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "main",
+                    ),
+                    res: None,
+                },
+                init: None,
+            },
+        ),
+    ],
+}

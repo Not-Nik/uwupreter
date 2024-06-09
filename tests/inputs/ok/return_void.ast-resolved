@@ -1,0 +1,54 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "returns",
+                ),
+                params: [],
+                statements: [
+                    Return(
+                        None,
+                    ),
+                    Print(
+                        String(
+                            "oh no",
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Call(
+                        FuncCall {
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "returns",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        0,
+                                    ),
+                                ),
+                            },
+                            args: [],
+                        },
+                    ),
+                    Print(
+                        String(
+                            "ok",
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

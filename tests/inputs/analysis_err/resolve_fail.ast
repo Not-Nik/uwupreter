@@ -1,0 +1,48 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Block(
+                        Block {
+                            statements: [
+                                VarDef(
+                                    VarDef {
+                                        data_type: Int,
+                                        res_ident: ResIdent {
+                                            ident: Ident(
+                                                "answer",
+                                            ),
+                                            res: None,
+                                        },
+                                        init: None,
+                                    },
+                                ),
+                            ],
+                        },
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "answer",
+                                ),
+                                res: None,
+                            },
+                            rhs: Literal(
+                                Int(
+                                    42,
+                                ),
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

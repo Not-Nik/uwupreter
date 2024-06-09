@@ -1,0 +1,6 @@
+// Type of `if` condition must be bool.
+
+void main() {
+    if (1)
+        ;
+}

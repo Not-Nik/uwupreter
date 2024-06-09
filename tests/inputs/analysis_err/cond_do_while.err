@@ -1,0 +1,1 @@
+condition of do-while loop must have type `bool`, found `int`

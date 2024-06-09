@@ -1,0 +1,5 @@
+// Signed overflow is undefined behavior!
+
+void main() {
+    int x = 9223372036854775807 + 1;
+}

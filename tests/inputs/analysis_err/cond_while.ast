@@ -1,0 +1,25 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    While(
+                        WhileStmt {
+                            cond: Literal(
+                                Int(
+                                    0,
+                                ),
+                            ),
+                            body: Empty,
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

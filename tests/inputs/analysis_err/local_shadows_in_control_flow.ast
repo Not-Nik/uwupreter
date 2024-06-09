@@ -1,0 +1,58 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "foo",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "x",
+                                ),
+                                res: None,
+                            },
+                            init: None,
+                        },
+                    ),
+                    While(
+                        WhileStmt {
+                            cond: Literal(
+                                Bool(
+                                    false,
+                                ),
+                            ),
+                            body: VarDef(
+                                VarDef {
+                                    data_type: Int,
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "x",
+                                        ),
+                                        res: None,
+                                    },
+                                    init: None,
+                                },
+                            ),
+                        },
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [],
+            },
+        ),
+    ],
+}

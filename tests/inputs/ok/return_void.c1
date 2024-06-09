@@ -1,0 +1,11 @@
+// Test `return;`.
+
+void returns() {
+    return;
+    print("oh no");
+}
+
+void main() {
+    returns();
+    print("ok");
+}

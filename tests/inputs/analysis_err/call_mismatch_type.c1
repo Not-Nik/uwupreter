@@ -1,0 +1,7 @@
+// No conversion from bool to int.
+
+void call_me(int f) {}
+
+void main() {
+    call_me(true);
+}

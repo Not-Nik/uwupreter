@@ -1,0 +1,131 @@
+Program {
+    items: [
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "a",
+                    ),
+                    res: Some(
+                        DefId(
+                            0,
+                        ),
+                    ),
+                },
+                init: Some(
+                    Literal(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+            },
+        ),
+        GlobalVar(
+            VarDef {
+                data_type: Float,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "b",
+                    ),
+                    res: Some(
+                        DefId(
+                            1,
+                        ),
+                    ),
+                },
+                init: Some(
+                    Literal(
+                        Float(
+                            2.2,
+                        ),
+                    ),
+                ),
+            },
+        ),
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "c",
+                    ),
+                    res: Some(
+                        DefId(
+                            2,
+                        ),
+                    ),
+                },
+                init: Some(
+                    Literal(
+                        Int(
+                            5,
+                        ),
+                    ),
+                ),
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "a",
+                                            ),
+                                            res: Some(
+                                                DefId(
+                                                    0,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                    rhs: BinaryOp(
+                                        BinOpExpr {
+                                            op: Div,
+                                            lhs: Var(
+                                                ResIdent {
+                                                    ident: Ident(
+                                                        "b",
+                                                    ),
+                                                    res: Some(
+                                                        DefId(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                },
+                                            ),
+                                            rhs: Var(
+                                                ResIdent {
+                                                    ident: Ident(
+                                                        "c",
+                                                    ),
+                                                    res: Some(
+                                                        DefId(
+                                                            2,
+                                                        ),
+                                                    ),
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}
