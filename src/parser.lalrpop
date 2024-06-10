@@ -255,29 +255,42 @@ BoxedSimpExpr: Box<ast::Expr> = {
 };
 
 SimpExpr: ast::Expr = {
-    <t:Term> => t,
-    <lhs:BoxedTerm> "+" <rhs:BoxedTerm> => ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::Add, lhs, rhs }),
-    <lhs:BoxedTerm> "-" <rhs:BoxedTerm> => ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::Sub, lhs, rhs }),
-    <lhs:BoxedTerm> "||" <rhs:BoxedTerm> => ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::LogOr, lhs, rhs }),
+    <t:Term> <rhs:SimpExprRhs*> => {
+        let mut it = rhs.into_iter();
+        let mut root = t;
+
+        while let Some((op, rhs)) = it.next() {
+            root = ast::Expr::BinaryOp(ast::BinOpExpr { op, lhs: Box::new(root), rhs });
+        }
+
+        root
+    },
 };
 
-BoxedTerm: Box<ast::Expr> = {
-    <t:Term> => Box::new(t)
-};
+SimpExprRhs: (ast::BinOp, Box<ast::Expr>) = {
+    "+" <rhs:Term> => (ast::BinOp::Add, Box::new(rhs)),
+    "-" <rhs:Term> => (ast::BinOp::Sub, Box::new(rhs)),
+    "||" <rhs:Term> => (ast::BinOp::LogOr, Box::new(rhs)),
+}
 
 Term: ast::Expr = {
-    <f:Factor> => f,
-    <lhs:BoxedFactor> "*" <rhs:BoxedFactor> =>
-         ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::Mul, lhs, rhs }),
-    <lhs:BoxedFactor> "/" <rhs:BoxedFactor> =>
-        ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::Div, lhs, rhs }),
-    <lhs:BoxedFactor> "&&" <rhs:BoxedFactor> =>
-        ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::LogAnd, lhs, rhs }),
+    <t:Factor> <rhs:TermRhs*> => {
+        let mut it = rhs.into_iter();
+        let mut root = t;
+
+        while let Some((op, rhs)) = it.next() {
+            root = ast::Expr::BinaryOp(ast::BinOpExpr { op, lhs: Box::new(root), rhs });
+        }
+
+        root
+    },
 };
 
-BoxedFactor: Box<ast::Expr> = {
-    <f:Factor> => Box::new(f)
-};
+TermRhs: (ast::BinOp, Box<ast::Expr>) = {
+    "*" <rhs:Factor> => (ast::BinOp::Mul, Box::new(rhs)),
+    "/" <rhs:Factor> => (ast::BinOp::Div, Box::new(rhs)),
+    "&&" <rhs:Factor> => (ast::BinOp::LogAnd, Box::new(rhs)),
+}
 
 Factor: ast::Expr = {
     "-" <f:Factor> => ast::Expr::UnaryMinus(Box::new(f)),
