@@ -108,13 +108,22 @@ Block: ast::Block = {
 
 Statement: ast::Stmt = {
     <i:IfStatement> => ast::Stmt::If(i),
-    <n:NoIfStatements> => n
-};
-
-NoIfStatements: ast::Stmt = {
     <f:ForStatement> => ast::Stmt::For(f),
     <d:DoWhileStatement> ";" => ast::Stmt::DoWhile(d),
     <w:WhileStatement> => ast::Stmt::While(w),
+    <r:ReturnStatement> ";" => ast::Stmt::Return(r),
+    <p:Print> ";" => ast::Stmt::Print(p),
+    <d:DeclAssignment> ";" => ast::Stmt::VarDef(d),
+    <a:StatAssignment> ";" => ast::Stmt::Assign(a),
+    <f:FunctionCall> ";" => ast::Stmt::Call(f),
+    <b:Block> => ast::Stmt::Block(b),
+    ";" => ast::Stmt::Empty
+};
+
+NoIfStatement: ast::Stmt = {
+    <f:MatchedFor> => ast::Stmt::For(f),
+    <d:DoWhileStatement> ";" => ast::Stmt::DoWhile(d),
+    <w:MatchedWhile> => ast::Stmt::While(w),
     <r:ReturnStatement> ";" => ast::Stmt::Return(r),
     <p:Print> ";" => ast::Stmt::Print(p),
     <d:DeclAssignment> ";" => ast::Stmt::VarDef(d),
@@ -136,13 +145,13 @@ MatchedIf: ast::IfStmt = {
             if_true: Box::new(ast::Stmt::If(tr)),
             if_false: Some(Box::new(ast::Stmt::If(el)))
         },
-    "if" "(" <cond:Assignment> ")" <tr:NoIfStatements> "else" <el:MatchedIf> =>
+    "if" "(" <cond:Assignment> ")" <tr:NoIfStatement> "else" <el:MatchedIf> =>
         ast::IfStmt {
             cond,
             if_true: Box::new(tr),
             if_false: Some(Box::new(ast::Stmt::If(el)))
         },
-    "if" "(" <cond:Assignment> ")" <tr:NoIfStatements> "else" <el:NoIfStatements> =>
+    "if" "(" <cond:Assignment> ")" <tr:NoIfStatement> "else" <el:NoIfStatement> =>
         ast::IfStmt {
             cond,
             if_true: Box::new(tr),
@@ -166,7 +175,6 @@ UnmatchedIf: ast::IfStmt = {
 };
 
 ForStatement: ast::ForStmt = {
-/*
     "for" "(" <init:DeclAssignment> ";" <cond:Expr> ";" <update:StatAssignment> ")" <body:Statement> =>
         ast::ForStmt {
             init: ast::ForInit::VarDef(init),
@@ -181,7 +189,37 @@ ForStatement: ast::ForStmt = {
             update,
             body: Box::new(body)
         }
-*/
+};
+
+MatchedFor: ast::ForStmt = {
+    "for" "(" <init:DeclAssignment> ";" <cond:Expr> ";" <update:StatAssignment> ")" <body:MatchedIf> =>
+        ast::ForStmt {
+            init: ast::ForInit::VarDef(init),
+            cond,
+            update,
+            body: Box::new(ast::Stmt::If(body))
+        },
+    "for" "(" <init:DeclAssignment> ";" <cond:Expr> ";" <update:StatAssignment> ")" <body:NoIfStatement> =>
+        ast::ForStmt {
+            init: ast::ForInit::VarDef(init),
+            cond,
+            update,
+            body: Box::new(body)
+        },
+    "for" "(" <init:StatAssignment> ";" <cond:Expr> ";" <update:StatAssignment> ")" <body:MatchedIf> =>
+        ast::ForStmt {
+            init: ast::ForInit::Assign(init),
+            cond,
+            update,
+            body: Box::new(ast::Stmt::If(body))
+        },
+    "for" "(" <init:StatAssignment> ";" <cond:Expr> ";" <update:StatAssignment> ")" <body:NoIfStatement> =>
+        ast::ForStmt {
+            init: ast::ForInit::Assign(init),
+            cond,
+            update,
+            body: Box::new(body)
+        }
 };
 
 DoWhileStatement: ast::WhileStmt = {
@@ -193,14 +231,25 @@ DoWhileStatement: ast::WhileStmt = {
 };
 
 WhileStatement: ast::WhileStmt = {
-/*
     "while" "(" <cond:Assignment> ")" <body:Statement> =>
         ast::WhileStmt {
             cond,
             body: Box::new(body)
         }
-*/
 };
+
+MatchedWhile: ast::WhileStmt = {
+    "while" "(" <cond:Assignment> ")" <body:MatchedIf> =>
+            ast::WhileStmt {
+                cond,
+                body: Box::new(ast::Stmt::If(body))
+            },
+    "while" "(" <cond:Assignment> ")" <body:NoIfStatement> =>
+        ast::WhileStmt {
+            cond,
+            body: Box::new(body)
+        }
+}
 
 ReturnStatement: Option<ast::Expr> = {
     "return" <expr:Expr?> => expr
