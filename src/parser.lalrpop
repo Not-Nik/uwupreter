@@ -237,4 +237,53 @@ Assignment: ast::Expr = {
 };
 
 Expr: ast::Expr = {
+    <s:SimpExpr> => s,
+    <b:BinOpExpr> => ast::Expr::BinaryOp(b),
+};
+
+BinOpExpr: ast::BinOpExpr = {
+    <lhs:BoxedSimpExpr> "==" <rhs:BoxedSimpExpr> => ast::BinOpExpr { op: ast::BinOp::Eq, lhs, rhs },
+    <lhs:BoxedSimpExpr> "!=" <rhs:BoxedSimpExpr> => ast::BinOpExpr { op: ast::BinOp::Neq, lhs, rhs },
+    <lhs:BoxedSimpExpr> "<=" <rhs:BoxedSimpExpr> => ast::BinOpExpr { op: ast::BinOp::Leq, lhs, rhs },
+    <lhs:BoxedSimpExpr> ">=" <rhs:BoxedSimpExpr> => ast::BinOpExpr { op: ast::BinOp::Geq, lhs, rhs },
+    <lhs:BoxedSimpExpr> "<" <rhs:BoxedSimpExpr> => ast::BinOpExpr { op: ast::BinOp::Lt, lhs, rhs },
+    <lhs:BoxedSimpExpr> ">" <rhs:BoxedSimpExpr> => ast::BinOpExpr { op: ast::BinOp::Gt, lhs, rhs },
+};
+
+BoxedSimpExpr: Box<ast::Expr> = {
+    <s:SimpExpr> => Box::new(s)
+};
+
+SimpExpr: ast::Expr = {
+    <t:Term> => t,
+    <lhs:BoxedTerm> "+" <rhs:BoxedTerm> => ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::Add, lhs, rhs }),
+    <lhs:BoxedTerm> "-" <rhs:BoxedTerm> => ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::Sub, lhs, rhs }),
+    <lhs:BoxedTerm> "||" <rhs:BoxedTerm> => ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::LogOr, lhs, rhs }),
+};
+
+BoxedTerm: Box<ast::Expr> = {
+    <t:Term> => Box::new(t)
+};
+
+Term: ast::Expr = {
+    <f:Factor> => f,
+    <lhs:BoxedFactor> "*" <rhs:BoxedFactor> =>
+         ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::Mul, lhs, rhs }),
+    <lhs:BoxedFactor> "/" <rhs:BoxedFactor> =>
+        ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::Div, lhs, rhs }),
+    <lhs:BoxedFactor> "&&" <rhs:BoxedFactor> =>
+        ast::Expr::BinaryOp(ast::BinOpExpr { op: ast::BinOp::LogAnd, lhs, rhs }),
+};
+
+BoxedFactor: Box<ast::Expr> = {
+    <f:Factor> => Box::new(f)
+};
+
+Factor: ast::Expr = {
+    "-" <f:Factor> => ast::Expr::UnaryMinus(Box::new(f)),
+    <i:"int_literal"> => ast::Expr::Literal(ast::Literal::Int(i)),
+    <f:"float_literal"> => ast::Expr::Literal(ast::Literal::Float(f)),
+    <b:"bool_literal"> => ast::Expr::Literal(ast::Literal::Bool(b)),
+    <c:FunctionCall> => ast::Expr::Call(c),
+    "(" <a:Assignment> ")" => a
 };
