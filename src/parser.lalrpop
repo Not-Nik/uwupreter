@@ -284,6 +284,7 @@ Factor: ast::Expr = {
     <i:"int_literal"> => ast::Expr::Literal(ast::Literal::Int(i)),
     <f:"float_literal"> => ast::Expr::Literal(ast::Literal::Float(f)),
     <b:"bool_literal"> => ast::Expr::Literal(ast::Literal::Bool(b)),
+    <i:ResIdent> => ast::Expr::Var(i),
     <c:FunctionCall> => ast::Expr::Call(c),
     "(" <a:Assignment> ")" => a
 };
