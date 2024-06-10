@@ -51,7 +51,11 @@ extern {
 
 Ident: ast::Ident = {
     <i:"ident"> => ast::Ident(i.to_string()),
-}
+};
+
+ResIdent: ast::ResIdent = {
+    <ident:Ident> => ast::ResIdent::new(ident),
+};
 
 // top-level grammar rule
 pub Program: ast::Program = {
@@ -83,17 +87,14 @@ ParameterList: Vec<ast::FuncParam> = {
 };
 
 FunctionCall: ast::FuncCall = {
-    <ident:Ident> "(" <args:(<Assignment> <("," <Assignment>)*>)?> ")" =>
+    <res_ident:ResIdent> "(" <args:(<Assignment> <("," <Assignment>)*>)?> ")" =>
         ast::FuncCall {
-            res_ident: ast::ResIdent::new(ident),
+            res_ident,
             args: args.map(|(a, mut v)| {
                         v.insert(0, a);
                         v
                     })
-                        .unwrap_or(vec![])
-                        .into_iter()
-                        .map(|a| ast::Expr::Assign(a))
-                        .collect::<Vec<ast::Expr>>(),
+                        .unwrap_or(vec![]),
         }
 }
 
@@ -107,6 +108,10 @@ Block: ast::Block = {
 
 Statement: ast::Stmt = {
     <i:IfStatement> => ast::Stmt::If(i),
+    <n:NoIfStatements> => n
+};
+
+NoIfStatements: ast::Stmt = {
     <f:ForStatement> => ast::Stmt::For(f),
     <d:DoWhileStatement> ";" => ast::Stmt::DoWhile(d),
     <w:WhileStatement> => ast::Stmt::While(w),
@@ -120,37 +125,116 @@ Statement: ast::Stmt = {
 };
 
 IfStatement: ast::IfStmt = {
+    <i:MatchedIf> => i,
+    <i:UnmatchedIf> => i
+};
 
+MatchedIf: ast::IfStmt = {
+    "if" "(" <cond:Assignment> ")" <tr:MatchedIf> "else" <el:MatchedIf> =>
+        ast::IfStmt {
+            cond,
+            if_true: Box::new(ast::Stmt::If(tr)),
+            if_false: Some(Box::new(ast::Stmt::If(el)))
+        },
+    "if" "(" <cond:Assignment> ")" <tr:NoIfStatements> "else" <el:MatchedIf> =>
+        ast::IfStmt {
+            cond,
+            if_true: Box::new(tr),
+            if_false: Some(Box::new(ast::Stmt::If(el)))
+        },
+    "if" "(" <cond:Assignment> ")" <tr:NoIfStatements> "else" <el:NoIfStatements> =>
+        ast::IfStmt {
+            cond,
+            if_true: Box::new(tr),
+            if_false: Some(Box::new(el))
+        }
+};
+
+UnmatchedIf: ast::IfStmt = {
+    "if" "(" <cond:Assignment> ")" <tr:Statement> =>
+        ast::IfStmt {
+            cond,
+            if_true: Box::new(tr),
+            if_false: None
+        },
+    "if" "(" <cond:Assignment> ")" <tr:MatchedIf> "else" <el:UnmatchedIf> =>
+        ast::IfStmt {
+            cond,
+            if_true: Box::new(ast::Stmt::If(tr)),
+            if_false: Some(Box::new(ast::Stmt::If(el)))
+        }
 };
 
 ForStatement: ast::ForStmt = {
-
-};
-
-WhileStatement: ast::WhileStmt = {
-
+/*
+    "for" "(" <init:DeclAssignment> ";" <cond:Expr> ";" <update:StatAssignment> ")" <body:Statement> =>
+        ast::ForStmt {
+            init: ast::ForInit::VarDef(init),
+            cond,
+            update,
+            body: Box::new(body)
+        },
+    "for" "(" <init:StatAssignment> ";" <cond:Expr> ";" <update:StatAssignment> ")" <body:Statement> =>
+        ast::ForStmt {
+            init: ast::ForInit::Assign(init),
+            cond,
+            update,
+            body: Box::new(body)
+        }
+*/
 };
 
 DoWhileStatement: ast::WhileStmt = {
+    "do" <body:Statement> "while" "(" <cond:Assignment> ")" =>
+        ast::WhileStmt {
+            cond,
+            body: Box::new(body)
+        }
+};
 
+WhileStatement: ast::WhileStmt = {
+/*
+    "while" "(" <cond:Assignment> ")" <body:Statement> =>
+        ast::WhileStmt {
+            cond,
+            body: Box::new(body)
+        }
+*/
 };
 
 ReturnStatement: Option<ast::Expr> = {
-
+    "return" <expr:Expr?> => expr
 };
 
 Print: ast::PrintStmt = {
-
+    "print" "(" <expr:Expr> ")" => ast::PrintStmt::Expr(expr),
+    "print" "(" <string:"string_literal"> ")" => ast::PrintStmt::String(string.to_string()),
 };
 
 DeclAssignment: ast::VarDef = {
+    <data_type:Type> <res_ident:ResIdent> <init:("=" <Assignment>)?> =>
+        ast::VarDef {
+            data_type,
+            res_ident,
+            init
+        }
 };
 
 Type: ast::DataType = {
+    "bool" => ast::DataType::Bool,
+    "float" => ast::DataType::Float,
+    "int" => ast::DataType::Int,
+    "void" => ast::DataType::Void,
 };
 
 StatAssignment: ast::Assign = {
+    <lhs:ResIdent> "=" <right:Assignment> => ast::Assign { lhs, rhs: Box::new(right) }
 };
 
-Assignment: ast::Assign = {
+Assignment: ast::Expr = {
+    <a:StatAssignment> => ast::Expr::Assign(a),
+    <e:Expr> => e
+};
+
+Expr: ast::Expr = {
 };
