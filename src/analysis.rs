@@ -382,8 +382,13 @@ impl Analyzer {
     ///
     /// The `kind` parameter describes the statement for diagnostics.
     fn visit_cond_expr(&mut self, expr: &mut ast::Expr, _kind: &str) -> Result<(), AnalysisError> {
-        let _cond_type = self.visit_expr(expr)?;
-        Ok(())
+        let cond_type = self.visit_expr(expr)?;
+
+        if cond_type != DataType::Bool {
+            Err(AnalysisError(String::from("expected boolean expression")))
+        } else {
+            Ok(())
+        }
     }
 
     /// Analyzes an expression and returns its type.
