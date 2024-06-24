@@ -256,7 +256,7 @@ ReturnStatement: Option<ast::Expr> = {
 };
 
 Print: ast::PrintStmt = {
-    "print" "(" <expr:Expr> ")" => ast::PrintStmt::Expr(expr),
+    "print" "(" <ass:Assignment> ")" => ast::PrintStmt::Expr(ass),
     "print" "(" <string:"string_literal"> ")" => ast::PrintStmt::String(string.to_string()),
 };
 
