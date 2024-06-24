@@ -483,7 +483,7 @@ impl Analyzer {
         let rhs_type = self.visit_expr(&mut bin_op_expr.rhs)?;
 
         if lhs_type == DataType::Void || rhs_type == DataType::Void {
-            return Err(AnalysisError(String::from("can't binop with void")));
+            return Err(AnalysisError(String::from("binary operands are not compatible")));
         }
 
         match bin_op_expr.op {
