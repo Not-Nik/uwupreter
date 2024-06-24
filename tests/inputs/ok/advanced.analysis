@@ -1,15 +1,17 @@
-ProgramAnalysis {
+ProgramInfo {
     definitions: Definitions {
         definitions: [
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        0,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            0,
+                        ),
                     ),
                     return_type: Int,
                     param_count: 1,
                     local_vars: [
-                        LocalVarId(
+                        LocalVarDefId(
                             DefId(
                                 1,
                             ),
@@ -18,20 +20,22 @@ ProgramAnalysis {
                 },
             ),
             LocalVar(
-                LocalVarAnalysis {
-                    local_var_index: 0,
+                VarInfo {
+                    offset: 0,
                     data_type: Int,
                 },
             ),
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        1,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            1,
+                        ),
                     ),
                     return_type: Void,
                     param_count: 0,
                     local_vars: [
-                        LocalVarId(
+                        LocalVarDefId(
                             DefId(
                                 3,
                             ),
@@ -40,17 +44,19 @@ ProgramAnalysis {
                 },
             ),
             LocalVar(
-                LocalVarAnalysis {
-                    local_var_index: 0,
+                VarInfo {
+                    offset: 0,
                     data_type: Int,
                 },
             ),
         ],
     },
     global_vars: [],
-    main_func: FuncId(
-        DefId(
-            2,
+    main_func: Some(
+        FuncDefId(
+            DefId(
+                2,
+            ),
         ),
     ),
 }

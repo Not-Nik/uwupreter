@@ -1,0 +1,7 @@
+int i;
+
+void main() {
+    float j;
+    j = i = 3;
+    print(j / 2);
+}

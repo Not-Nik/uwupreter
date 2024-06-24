@@ -1,0 +1,106 @@
+Program {
+    items: [
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "i",
+                    ),
+                    res: Some(
+                        DefId(
+                            0,
+                        ),
+                    ),
+                },
+                init: None,
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Float,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "j",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        2,
+                                    ),
+                                ),
+                            },
+                            init: None,
+                        },
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "j",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        2,
+                                    ),
+                                ),
+                            },
+                            rhs: Assign(
+                                Assign {
+                                    lhs: ResIdent {
+                                        ident: Ident(
+                                            "i",
+                                        ),
+                                        res: Some(
+                                            DefId(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                    rhs: Literal(
+                                        Int(
+                                            3,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Div,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "j",
+                                            ),
+                                            res: Some(
+                                                DefId(
+                                                    2,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            2,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

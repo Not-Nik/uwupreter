@@ -1,0 +1,5 @@
+void main() {
+    do {
+    } while (false)
+    // Semikolon fehlt hier
+}

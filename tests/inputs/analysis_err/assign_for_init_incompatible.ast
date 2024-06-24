@@ -1,0 +1,56 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    For(
+                        ForStmt {
+                            init: VarDef(
+                                VarDef {
+                                    data_type: Int,
+                                    res_ident: ResIdent {
+                                        ident: Ident(
+                                            "i",
+                                        ),
+                                        res: None,
+                                    },
+                                    init: Some(
+                                        Literal(
+                                            Float(
+                                                3.5,
+                                            ),
+                                        ),
+                                    ),
+                                },
+                            ),
+                            cond: Literal(
+                                Bool(
+                                    true,
+                                ),
+                            ),
+                            update: Assign {
+                                lhs: ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: None,
+                                },
+                                rhs: Literal(
+                                    Int(
+                                        1,
+                                    ),
+                                ),
+                            },
+                            body: Empty,
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

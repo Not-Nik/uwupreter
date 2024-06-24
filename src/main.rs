@@ -1,17 +1,54 @@
-use std::{env, fs};
-use logos::Logos;
-use uwupreter::token::Token;
+use uwupreter::{analyze, parse};
+use std::{env, fs, process::ExitCode};
 
-fn main() {
-    let args: Vec<_> = env::args().collect();
-    let path = match args.get(1) {
-        None => "tests/inputs/ok/demorgan.c1",
-        Some(path) => path
-    };
-    let input = fs::read_to_string(path).expect("input file should exist");
-    let mut lexer = Token::lexer(input.as_str());
+fn main() -> ExitCode {
+    let mut args = env::args();
 
-    while let Some(val) = lexer.next() {
-        println!("{:?}: {:?}", val, lexer.slice());
+    if args.len() < 2 {
+        println!(
+            "Usage: {} <c1-source>",
+            args.next().as_deref().unwrap_or("uwupreter")
+        );
+        return ExitCode::FAILURE;
     }
+
+    // Read the source file into a string.
+    let input = match fs::read_to_string(args.nth(1).unwrap()) {
+        Ok(input) => input,
+        Err(err) => {
+            println!("failed to read c1 source file: {err}");
+            return ExitCode::FAILURE;
+        }
+    };
+
+    // Parse the source code into an AST.
+    let mut ast = match parse(&input) {
+        Ok(ast) => {
+            println!("[✓] syntax");
+            ast
+        }
+        Err(err) => {
+            println!("[x] syntax");
+            println!("{err}");
+            return ExitCode::FAILURE;
+        }
+    };
+
+    // Run semantic analysis on the AST, writing resolutions into the AST,
+    // and collecting auxiliary information required for interpretation.
+    let analysis = match analyze(&mut ast) {
+        Ok(analysis) => {
+            println!("[✓] analysis");
+            analysis
+        }
+        Err(err) => {
+            println!("[x] analysis");
+            println!("{err}");
+            return ExitCode::FAILURE;
+        }
+    };
+
+    print!("{analysis:?}");
+
+    ExitCode::SUCCESS
 }

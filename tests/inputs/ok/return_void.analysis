@@ -1,10 +1,12 @@
-ProgramAnalysis {
+ProgramInfo {
     definitions: Definitions {
         definitions: [
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        0,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            0,
+                        ),
                     ),
                     return_type: Void,
                     param_count: 0,
@@ -12,9 +14,11 @@ ProgramAnalysis {
                 },
             ),
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        1,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            1,
+                        ),
                     ),
                     return_type: Void,
                     param_count: 0,
@@ -24,9 +28,11 @@ ProgramAnalysis {
         ],
     },
     global_vars: [],
-    main_func: FuncId(
-        DefId(
-            1,
+    main_func: Some(
+        FuncDefId(
+            DefId(
+                1,
+            ),
         ),
     ),
 }

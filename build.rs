@@ -1,8 +1,7 @@
 use std::{
+    env, fs,
     io::Write,
     path::{Path, PathBuf},
-    env,
-    fs
 };
 
 fn main() {
@@ -27,6 +26,15 @@ fn gen_test_cases() {
             ("err", "parser_err"),
         ],
     );
+    gen_test_cases_for_suite(
+        "analysis",
+        &[
+            ("ok", "ok"),
+            ("ok", "interpreter_err"),
+            ("err", "analysis_err"),
+        ],
+    );
+    gen_test_cases_for_suite("interpreter", &[("ok", "ok"), ("err", "interpreter_err")]);
     println!("cargo::rerun-if-changed=tests/inputs");
 }
 

@@ -1,1 +1,1 @@
-cannot define `x` multiple times in the same scope
+duplicate definition of x in the same scope

@@ -1,7 +1,7 @@
 use std::path::Path;
 use std::{env, fs};
 
-use similar::{ChangeTag, TextDiff};
+use similar::TextDiff;
 
 fn run_test(input_path: &str, output_ext: &str, is_err: bool, run: impl FnOnce(&str) -> String) {
     let input = fs::read_to_string(input_path).expect("failed to read input");
@@ -32,21 +32,13 @@ fn run_test(input_path: &str, output_ext: &str, is_err: bool, run: impl FnOnce(&
             )
         });
         if expected_output != actual_output {
-            println!(">>> EXPECTED OUTPUT <<<");
-            println!("{expected_output}");
-            println!(">>> ACTUAL OUTPUT <<<");
-            println!("{actual_output}");
-            println!(">>> DIFF <<<");
+            // println!(">>> EXPECTED OUTPUT <<<");
+            // println!("{expected_output}");
+            // println!(">>> ACTUAL OUTPUT <<<");
+            // println!("{actual_output}");
+            // println!(">>> DIFF <<<");
             let diff = TextDiff::from_lines(&expected_output, &actual_output);
-            for change in diff.iter_all_changes() {
-                let tag = match change.tag() {
-                    ChangeTag::Equal => '=',
-                    ChangeTag::Delete => '-',
-                    ChangeTag::Insert => '+',
-                };
-                print!("{tag}{change}");
-            }
-
+            println!("{}", diff.unified_diff().missing_newline_hint(false));
             panic!("test output differs");
         }
     }

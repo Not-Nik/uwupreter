@@ -10,10 +10,10 @@ Program {
                 statements: [
                     VarDef(
                         VarDef {
-                            data_type: Float,
+                            data_type: Int,
                             res_ident: ResIdent {
                                 ident: Ident(
-                                    "x",
+                                    "i",
                                 ),
                                 res: None,
                             },
@@ -25,6 +25,40 @@ Program {
                                 ),
                             ),
                         },
+                    ),
+                    VarDef(
+                        VarDef {
+                            data_type: Float,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "x",
+                                ),
+                                res: None,
+                            },
+                            init: None,
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Assign(
+                                Assign {
+                                    lhs: ResIdent {
+                                        ident: Ident(
+                                            "x",
+                                        ),
+                                        res: None,
+                                    },
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "i",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
                     ),
                     Print(
                         Expr(

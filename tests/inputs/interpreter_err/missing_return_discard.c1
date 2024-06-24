@@ -1,0 +1,7 @@
+// Even if the return value is discarded, reaching the end of a non-void
+// function is undefined behavior.
+
+int foo() {}
+void main() {
+    foo();
+}

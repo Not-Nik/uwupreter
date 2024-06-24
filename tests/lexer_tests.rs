@@ -9,10 +9,7 @@ fn empty_stream() {
 
 #[test]
 fn bool_literals() {
-    for (input, output) in [
-        ("true", BoolLiteral(true)),
-        ("false", BoolLiteral(false))
-    ] {
+    for (input, output) in [("true", BoolLiteral(true)), ("false", BoolLiteral(false))] {
         let token = Token::lexer(input).next();
         assert_eq!(token, Some(Ok(output)));
     }
@@ -33,10 +30,7 @@ fn float_literals() {
 
 #[test]
 fn int_literals() {
-    for (input, output) in [
-        ("13", IntLiteral(13)),
-        ("001", IntLiteral(001)),
-    ] {
+    for (input, output) in [("13", IntLiteral(13)), ("001", IntLiteral(001))] {
         let token = Token::lexer(input).next();
         assert_eq!(token, Some(Ok(output)));
     }
@@ -134,4 +128,26 @@ fn illegal_character() {
     let mut lexer = Token::lexer("100%");
     assert_eq!(lexer.next(), Some(Ok(Token::IntLiteral(100))));
     assert_eq!(lexer.next(), Some(Err(())));
+}
+
+#[test]
+fn overflow() {
+    let token = Token::lexer("9223372036854775808").next();
+    assert_eq!(token, Some(Err(())));
+}
+
+// `-1` should be parsed as two tokens.
+#[test]
+fn neg_int_two_tokens() {
+    let mut lexer = Token::lexer("-1");
+    assert_eq!(lexer.next(), Some(Ok(Token::Sub)));
+    assert_eq!(lexer.next(), Some(Ok(Token::IntLiteral(1))));
+    assert_eq!(lexer.next(), None);
+}
+
+// `e0` should not be an ident and not a float literal.
+#[test]
+fn e0_ident() {
+    let token = Token::lexer("e0").next();
+    assert_eq!(token, Some(Ok(Ident("e0".to_owned()))));
 }

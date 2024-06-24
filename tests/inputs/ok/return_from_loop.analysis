@@ -1,19 +1,18 @@
-ProgramAnalysis {
+ProgramInfo {
     definitions: Definitions {
         definitions: [
             GlobalVar(
-                GlobalVarAnalysis {
-                    item_id: ItemId(
-                        0,
-                    ),
-                    global_var_index: 0,
+                VarInfo {
+                    offset: 0,
                     data_type: Int,
                 },
             ),
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        1,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            1,
+                        ),
                     ),
                     return_type: Int,
                     param_count: 0,
@@ -21,9 +20,11 @@ ProgramAnalysis {
                 },
             ),
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        2,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            2,
+                        ),
                     ),
                     return_type: Int,
                     param_count: 0,
@@ -31,9 +32,11 @@ ProgramAnalysis {
                 },
             ),
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        3,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            3,
+                        ),
                     ),
                     return_type: Int,
                     param_count: 0,
@@ -41,14 +44,16 @@ ProgramAnalysis {
                 },
             ),
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        4,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            4,
+                        ),
                     ),
                     return_type: Void,
                     param_count: 0,
                     local_vars: [
-                        LocalVarId(
+                        LocalVarDefId(
                             DefId(
                                 5,
                             ),
@@ -57,23 +62,25 @@ ProgramAnalysis {
                 },
             ),
             LocalVar(
-                LocalVarAnalysis {
-                    local_var_index: 0,
+                VarInfo {
+                    offset: 0,
                     data_type: Int,
                 },
             ),
         ],
     },
     global_vars: [
-        GlobalVarId(
-            DefId(
+        GlobalVarItemId(
+            ItemId(
                 0,
             ),
         ),
     ],
-    main_func: FuncId(
-        DefId(
-            4,
+    main_func: Some(
+        FuncDefId(
+            DefId(
+                4,
+            ),
         ),
     ),
 }

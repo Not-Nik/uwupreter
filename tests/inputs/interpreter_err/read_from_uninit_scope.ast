@@ -1,0 +1,69 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Block(
+                        Block {
+                            statements: [
+                                VarDef(
+                                    VarDef {
+                                        data_type: Int,
+                                        res_ident: ResIdent {
+                                            ident: Ident(
+                                                "i",
+                                            ),
+                                            res: None,
+                                        },
+                                        init: Some(
+                                            Literal(
+                                                Int(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ],
+                        },
+                    ),
+                    Block(
+                        Block {
+                            statements: [
+                                VarDef(
+                                    VarDef {
+                                        data_type: Int,
+                                        res_ident: ResIdent {
+                                            ident: Ident(
+                                                "j",
+                                            ),
+                                            res: None,
+                                        },
+                                        init: None,
+                                    },
+                                ),
+                                Print(
+                                    Expr(
+                                        Var(
+                                            ResIdent {
+                                                ident: Ident(
+                                                    "j",
+                                                ),
+                                                res: None,
+                                            },
+                                        ),
+                                    ),
+                                ),
+                            ],
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

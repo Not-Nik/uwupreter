@@ -1,0 +1,5 @@
+
+void main() {
+    for (int i = 3.5; true; i = 1)
+        ;
+}

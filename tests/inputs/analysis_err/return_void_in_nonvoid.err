@@ -1,1 +1,1 @@
-cannot cast from `void` to `int`
+cannot return value of type `void` from function returning `int`

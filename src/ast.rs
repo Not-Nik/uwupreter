@@ -26,7 +26,7 @@
 //! For example in this program there are three definitions of `x` and the print statement
 //! should refer to the *innermost* of them:
 //!
-//! ```custom
+//! ```c
 //! int x = 1;
 //! void main() {
 //!     int x = 2;
@@ -92,6 +92,7 @@
 
 use std::borrow::Borrow;
 use std::fmt::{self, Write};
+use std::ops::{Deref, Index};
 
 use lalrpop_util::lalrpop_mod;
 
@@ -159,6 +160,14 @@ impl Borrow<str> for Ident {
     }
 }
 
+impl Deref for Ident {
+    type Target = String;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 /// A unique identifier for the (function or variable) definition that a resolvable
 /// identifier ([`ResIdent`]) resolves to.
 ///
@@ -174,7 +183,7 @@ pub struct DefId(pub usize);
 #[derive(Debug, Clone, PartialEq)]
 pub struct ResIdent {
     /// The name that is to be resolved.
-    pub ident: Ident,
+    ident: Ident,
     /// The definition that this identifier resolves to.
     ///
     /// This field is written to during analysis and read from during interpretation.
@@ -212,11 +221,33 @@ impl ResIdent {
     }
 }
 
+impl fmt::Display for ResIdent {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        self.ident.fmt(f)
+    }
+}
+
+impl Deref for ResIdent {
+    type Target = Ident;
+
+    fn deref(&self) -> &Self::Target {
+        &self.ident
+    }
+}
+
 /// Uniquely identifies an [`Item`] in a [`Program`] (AST).
 ///
 /// The `ItemId` corresponds to the index of the item in the AST.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct ItemId(pub usize);
+
+/// Identifies a global variable item in [`Program`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct GlobalVarItemId(pub ItemId);
+
+/// Identifies a function item in [`Program`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct FuncItemId(pub ItemId);
 
 /// The top-level node of the abstract syntax tree (AST) for a program.
 ///
@@ -228,10 +259,35 @@ pub struct Program {
     pub items: Vec<Item>,
 }
 
-impl Program {
-    /// Returns the [`Item`] for a [`ItemId`].
-    pub fn get_item(&self, id: ItemId) -> &Item {
-        &self.items[id.0]
+impl Index<ItemId> for Program {
+    type Output = Item;
+
+    fn index(&self, index: ItemId) -> &Self::Output {
+        &self.items[index.0]
+    }
+}
+
+impl Index<GlobalVarItemId> for Program {
+    type Output = VarDef;
+
+    /// Fetches the variable definition from the AST.
+    fn index(&self, id: GlobalVarItemId) -> &Self::Output {
+        match &self[id.0] {
+            Item::GlobalVar(var_def) => var_def,
+            item => unreachable!("expected {self:?} to be a global variable, found {item:?}"),
+        }
+    }
+}
+
+impl Index<FuncItemId> for Program {
+    type Output = FuncDef;
+
+    /// Fetches the function definition from the AST.
+    fn index(&self, id: FuncItemId) -> &Self::Output {
+        match &self[id.0] {
+            Item::Func(func_def) => func_def,
+            item => unreachable!("expected {self:?} to be a function, found {item:?}"),
+        }
     }
 }
 
@@ -285,13 +341,13 @@ pub struct FuncCall {
 ///
 /// with initializer:
 ///
-/// ```custom
+/// ```c
 /// int answer = 42;
 /// ```
 ///
 /// without initializer:
 ///
-/// ```custom
+/// ```c
 /// int uninit;
 /// ```
 #[derive(Debug, Clone, PartialEq)]
@@ -322,7 +378,7 @@ pub struct Assign {
 ///
 /// # Example
 ///
-/// ```custom
+/// ```c
 /// {
 ///     a = 1;
 ///     b = 2;

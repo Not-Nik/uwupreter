@@ -10,10 +10,10 @@ Program {
                 statements: [
                     VarDef(
                         VarDef {
-                            data_type: Float,
+                            data_type: Int,
                             res_ident: ResIdent {
                                 ident: Ident(
-                                    "x",
+                                    "i",
                                 ),
                                 res: Some(
                                     DefId(
@@ -30,6 +30,52 @@ Program {
                             ),
                         },
                     ),
+                    VarDef(
+                        VarDef {
+                            data_type: Float,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "x",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        2,
+                                    ),
+                                ),
+                            },
+                            init: None,
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Assign(
+                                Assign {
+                                    lhs: ResIdent {
+                                        ident: Ident(
+                                            "x",
+                                        ),
+                                        res: Some(
+                                            DefId(
+                                                2,
+                                            ),
+                                        ),
+                                    },
+                                    rhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "i",
+                                            ),
+                                            res: Some(
+                                                DefId(
+                                                    1,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
                     Print(
                         Expr(
                             BinaryOp(
@@ -42,7 +88,7 @@ Program {
                                             ),
                                             res: Some(
                                                 DefId(
-                                                    1,
+                                                    2,
                                                 ),
                                             ),
                                         },
@@ -69,7 +115,7 @@ Program {
                                                 ),
                                                 res: Some(
                                                     DefId(
-                                                        1,
+                                                        2,
                                                     ),
                                                 ),
                                             },

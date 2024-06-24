@@ -1,0 +1,395 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Lt,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Lt,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Gt,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Gt,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Leq,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Leq,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Geq,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Geq,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Eq,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Eq,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Sub,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Sub,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Mul,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Mul,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Div,
+                                    lhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Div,
+                                    lhs: Literal(
+                                        Float(
+                                            1.5,
+                                        ),
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

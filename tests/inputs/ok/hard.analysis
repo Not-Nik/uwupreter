@@ -1,20 +1,22 @@
-ProgramAnalysis {
+ProgramInfo {
     definitions: Definitions {
         definitions: [
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        0,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            0,
+                        ),
                     ),
                     return_type: Int,
                     param_count: 2,
                     local_vars: [
-                        LocalVarId(
+                        LocalVarDefId(
                             DefId(
                                 1,
                             ),
                         ),
-                        LocalVarId(
+                        LocalVarDefId(
                             DefId(
                                 2,
                             ),
@@ -23,31 +25,33 @@ ProgramAnalysis {
                 },
             ),
             LocalVar(
-                LocalVarAnalysis {
-                    local_var_index: 0,
+                VarInfo {
+                    offset: 0,
                     data_type: Int,
                 },
             ),
             LocalVar(
-                LocalVarAnalysis {
-                    local_var_index: 1,
+                VarInfo {
+                    offset: 1,
                     data_type: Int,
                 },
             ),
             Func(
-                FuncAnalysis {
-                    item_id: ItemId(
-                        1,
+                FuncInfo {
+                    item_id: FuncItemId(
+                        ItemId(
+                            1,
+                        ),
                     ),
                     return_type: Void,
                     param_count: 0,
                     local_vars: [
-                        LocalVarId(
+                        LocalVarDefId(
                             DefId(
                                 4,
                             ),
                         ),
-                        LocalVarId(
+                        LocalVarDefId(
                             DefId(
                                 5,
                             ),
@@ -56,23 +60,25 @@ ProgramAnalysis {
                 },
             ),
             LocalVar(
-                LocalVarAnalysis {
-                    local_var_index: 0,
+                VarInfo {
+                    offset: 0,
                     data_type: Int,
                 },
             ),
             LocalVar(
-                LocalVarAnalysis {
-                    local_var_index: 1,
+                VarInfo {
+                    offset: 1,
                     data_type: Int,
                 },
             ),
         ],
     },
     global_vars: [],
-    main_func: FuncId(
-        DefId(
-            3,
+    main_func: Some(
+        FuncDefId(
+            DefId(
+                3,
+            ),
         ),
     ),
 }
