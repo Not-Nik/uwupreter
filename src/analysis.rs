@@ -99,7 +99,7 @@ use std::ops::Index;
 pub use symtab::{DefInfo, Definitions, FuncDefId, FuncInfo, LocalVarDefId, Symtab, VarInfo};
 
 use crate::ast;
-use crate::ast::{BinOp, DataType, DefId};
+use crate::ast::{BinOp, DataType, DefId, ResIdent, VarDef};
 
 mod symtab;
 
@@ -157,7 +157,9 @@ impl Analyzer {
 
         match def_info {
             DefInfo::Func(_) => {
-                return Err(AnalysisError(String::from("can't treat function as variable")))
+                return Err(AnalysisError(String::from(
+                    "can't treat function as variable",
+                )))
             }
             DefInfo::LocalVar(var) | DefInfo::GlobalVar(var) => Ok(var.data_type),
         }
@@ -180,16 +182,30 @@ impl Analyzer {
     /// Analyzes a global variable definition.
     fn visit_global_var_def(
         &mut self,
-        _item_id: ast::GlobalVarItemId,
+        item_id: ast::GlobalVarItemId,
         var_def: &mut ast::VarDef,
     ) -> Result<(), AnalysisError> {
         self.visit_var_def(var_def, "global variable")?;
+
+        let id = self
+            .tab
+            .define_global_var(&*var_def.res_ident, var_def.data_type, item_id)
+            .map_err(|e| AnalysisError(format!("symbol '{}' already defined", e.0)))?;
+
+        var_def.res_ident.set_res(id);
         Ok(())
     }
 
     /// Analyzes a local variable definition (not a function parameter).
     fn visit_local_var_def(&mut self, var_def: &mut ast::VarDef) -> Result<(), AnalysisError> {
         self.visit_var_def(var_def, "local variable")?;
+
+        let id = self
+            .tab
+            .define_local_var(&*var_def.res_ident, var_def.data_type)
+            .map_err(|e| AnalysisError(format!("symbol '{}' already defined", e.0)))?;
+
+        var_def.res_ident.set_res(id);
         Ok(())
     }
 
@@ -204,18 +220,40 @@ impl Analyzer {
         var_def: &mut ast::VarDef,
         _kind: &str,
     ) -> Result<(), AnalysisError> {
-        if let Some(init) = &mut var_def.init {
-            let _expr_type = self.visit_expr(init)?;
+        if var_def.data_type == DataType::Void {
+            return Err(AnalysisError(String::from(
+                "variables of type void are not allowed",
+            )));
         }
+
+        if let Some(init) = &mut var_def.init {
+            let expr_type = self.visit_expr(init)?;
+
+            if !Self::is_compatible(var_def.data_type, expr_type) {
+                return Err(AnalysisError(String::from(
+                    "assignment operands are not compatible",
+                )));
+            }
+        }
+
         Ok(())
     }
 
     /// Analyzes a function definition.
     fn visit_func_def(
         &mut self,
-        _item_id: ast::FuncItemId,
+        item_id: ast::FuncItemId,
         func_def: &mut ast::FuncDef,
     ) -> Result<(), AnalysisError> {
+        self.tab.define_func(
+            func_def.ident.clone(),
+            func_def.return_type,
+            func_def.params.len(),
+            item_id,
+        )?;
+
+        self.tab.scope_enter();
+
         for param in &func_def.params {
             self.visit_func_param(param)?;
         }
@@ -223,13 +261,18 @@ impl Analyzer {
         for stmt in &mut func_def.statements {
             self.visit_stmt(stmt)?;
         }
+        self.tab.scope_leave();
 
         Ok(())
     }
 
     /// Analyzes a function parameter.
-    fn visit_func_param(&mut self, _param: &ast::FuncParam) -> Result<(), AnalysisError> {
-        Ok(())
+    fn visit_func_param(&mut self, param: &ast::FuncParam) -> Result<(), AnalysisError> {
+        self.visit_local_var_def(&mut VarDef {
+            data_type: param.data_type.clone(),
+            res_ident: ResIdent::new(param.ident.clone()),
+            init: None,
+        })
     }
 
     /// Analyzes a statement.
@@ -257,9 +300,11 @@ impl Analyzer {
 
     /// Analyzes a block statement.
     fn visit_block(&mut self, block: &mut ast::Block) -> Result<(), AnalysisError> {
+        self.tab.scope_enter();
         for stmt in &mut block.statements {
             self.visit_stmt(stmt)?;
         }
+        self.tab.scope_leave();
         Ok(())
     }
 
@@ -275,6 +320,7 @@ impl Analyzer {
 
     /// Analyzes a `for` statement.
     fn visit_for_stmt(&mut self, stmt: &mut ast::ForStmt) -> Result<(), AnalysisError> {
+        self.tab.scope_enter();
         match &mut stmt.init {
             ast::ForInit::VarDef(var_def) => self.visit_local_var_def(var_def)?,
             ast::ForInit::Assign(assign) => {
@@ -285,6 +331,7 @@ impl Analyzer {
         self.visit_cond_expr(&mut stmt.cond, "for loop")?;
         let _expr_type = self.visit_assign(&mut stmt.update)?;
         self.visit_stmt(&mut stmt.body)?;
+        self.tab.scope_leave();
         Ok(())
     }
 
@@ -302,9 +349,22 @@ impl Analyzer {
 
     /// Analyzes a `return` statement.
     fn visit_return_stmt(&mut self, expr: &mut Option<ast::Expr>) -> Result<(), AnalysisError> {
+        let return_type = self.tab.current_func().unwrap().return_type;
+
         if let Some(expr) = expr {
-            let _expr_type = self.visit_expr(expr)?;
+            let expr_type = self.visit_expr(expr)?;
+
+            if !Self::is_compatible(return_type, expr_type)
+                || (return_type == DataType::Void && expr_type == DataType::Void)
+            {
+                return Err(AnalysisError(String::from("invalid return value")));
+            }
+        } else if return_type != DataType::Void {
+            return Err(AnalysisError(String::from(
+                "no return value in function with return type",
+            )));
         }
+
         Ok(())
     }
 
@@ -313,8 +373,13 @@ impl Analyzer {
         match print {
             ast::PrintStmt::String(_) => Ok(()),
             ast::PrintStmt::Expr(expr) => {
-                let _expr_type = self.visit_expr(expr)?;
-                Ok(())
+                let expr_type = self.visit_expr(expr)?;
+
+                if expr_type == DataType::Void {
+                    return Err(AnalysisError(String::from("can't print void expression")));
+                } else {
+                    Ok(())
+                }
             }
         }
     }
@@ -329,6 +394,8 @@ impl Analyzer {
                 resolved.unwrap_err().0
             )));
         };
+
+        call.res_ident.set_res(def);
 
         let def_info = self.tab[def].clone();
 
@@ -348,7 +415,7 @@ impl Analyzer {
             let expr_type = self.visit_expr(expr)?;
 
             if !Self::is_compatible(param_type, expr_type) {
-                return Err(AnalysisError(String::from("wrong parameter type")))
+                return Err(AnalysisError(String::from("wrong parameter type")));
             }
         }
 
@@ -368,10 +435,14 @@ impl Analyzer {
             )));
         };
 
+        assign.lhs.set_res(def);
+
         let lhs_type = self.get_variable_type(def)?;
 
         if !Self::is_compatible(lhs_type, rhs_type) {
-            Err(AnalysisError(String::from("assignment operands are not compatible")))
+            Err(AnalysisError(String::from(
+                "assignment operands are not compatible",
+            )))
         } else {
             Ok(lhs_type)
         }
@@ -436,20 +507,10 @@ impl Analyzer {
                     Ok(DataType::Bool)
                 }
             }
-            BinOp::Eq | BinOp::Neq => {
+            BinOp::Eq | BinOp::Neq | BinOp::Lt | BinOp::Gt | BinOp::Leq | BinOp::Geq => {
                 if (lhs_type == DataType::Bool || rhs_type == DataType::Bool)
-                    && lhs_type != DataType::Bool
-                    || rhs_type != DataType::Bool
+                    && (lhs_type != DataType::Bool || rhs_type != DataType::Bool)
                 {
-                    Err(AnalysisError(String::from(
-                        "binary operands are not compatible",
-                    )))
-                } else {
-                    Ok(DataType::Bool)
-                }
-            }
-            BinOp::Lt | BinOp::Gt | BinOp::Leq | BinOp::Geq => {
-                if lhs_type == DataType::Bool || rhs_type == DataType::Bool {
                     Err(AnalysisError(String::from(
                         "binary operands are not compatible",
                     )))
@@ -489,6 +550,8 @@ impl Analyzer {
                 resolved.unwrap_err().0
             )));
         };
+
+        res_ident.set_res(def);
 
         let def_info = &self.tab[def];
 
