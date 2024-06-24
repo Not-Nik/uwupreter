@@ -99,7 +99,7 @@ use std::ops::Index;
 pub use symtab::{DefInfo, Definitions, FuncDefId, FuncInfo, LocalVarDefId, Symtab, VarInfo};
 
 use crate::ast;
-use crate::ast::{BinOp, DataType};
+use crate::ast::{BinOp, DataType, DefId};
 
 mod symtab;
 
@@ -147,6 +147,22 @@ pub struct Analyzer {
 }
 
 impl Analyzer {
+    // Used when assigning
+    fn is_compatible(lhs: DataType, rhs: DataType) -> bool {
+        (lhs == rhs) || (lhs == DataType::Float && rhs == DataType::Int)
+    }
+
+    fn get_variable_type(&mut self, id: DefId) -> Result<DataType, AnalysisError> {
+        let def_info = &self.tab[id];
+
+        match def_info {
+            DefInfo::Func(_) => {
+                return Err(AnalysisError(String::from("can't treat function as variable")))
+            }
+            DefInfo::LocalVar(var) | DefInfo::GlobalVar(var) => Ok(var.data_type),
+        }
+    }
+
     /// Analyzes an item.
     fn visit_item(
         &mut self,
@@ -305,40 +321,59 @@ impl Analyzer {
 
     /// Analyzes a call statement or expression and returns its return type.
     fn visit_call(&mut self, call: &mut ast::FuncCall) -> Result<ast::DataType, AnalysisError> {
-        for expr in &mut call.args {
-            let _expr_type = self.visit_expr(expr)?;
-        }
-
         let resolved = self.tab.resolve(&*call.res_ident.0);
 
         let Ok(def) = resolved else {
-            return Err(AnalysisError(format!("referenced undefined symbol '{}'", resolved.unwrap_err().0)));
+            return Err(AnalysisError(format!(
+                "referenced undefined symbol '{}'",
+                resolved.unwrap_err().0
+            )));
         };
 
-        let def_info = &self.tab[def];
+        let def_info = self.tab[def].clone();
 
         let DefInfo::Func(func_info) = def_info else {
             return Err(AnalysisError(String::from("not a function")));
         };
+
+        if func_info.param_count > call.args.len() {
+            return Err(AnalysisError(String::from("to few arguments")));
+        } else if func_info.param_count < call.args.len() {
+            return Err(AnalysisError(String::from("to many arguments")));
+        }
+
+        for (index, expr) in call.args.iter_mut().enumerate() {
+            let param = func_info.local_vars[index];
+            let param_type = self.get_variable_type(param.0)?;
+            let expr_type = self.visit_expr(expr)?;
+
+            if !Self::is_compatible(param_type, expr_type) {
+                return Err(AnalysisError(String::from("wrong parameter type")))
+            }
+        }
 
         Ok(func_info.return_type)
     }
 
     /// Analyzes an assignment statement or expression and returns its type.
     fn visit_assign(&mut self, assign: &mut ast::Assign) -> Result<ast::DataType, AnalysisError> {
-        let _rhs_type = self.visit_expr(&mut assign.rhs)?;
+        let rhs_type = self.visit_expr(&mut assign.rhs)?;
 
         let resolved = self.tab.resolve(&*assign.lhs.0);
 
         let Ok(def) = resolved else {
-            return Err(AnalysisError(format!("referenced undefined symbol '{}'", resolved.unwrap_err().0)));
+            return Err(AnalysisError(format!(
+                "referenced undefined symbol '{}'",
+                resolved.unwrap_err().0
+            )));
         };
 
-        let def_info = &self.tab[def];
+        let lhs_type = self.get_variable_type(def)?;
 
-        match def_info {
-            DefInfo::Func(_) => Err(AnalysisError(String::from("can't assign to a function"))),
-            DefInfo::LocalVar(var) | DefInfo::GlobalVar(var) => Ok(var.data_type),
+        if !Self::is_compatible(lhs_type, rhs_type) {
+            Err(AnalysisError(String::from("assignment operands are not compatible")))
+        } else {
+            Ok(lhs_type)
         }
     }
 
@@ -378,7 +413,9 @@ impl Analyzer {
         match bin_op_expr.op {
             BinOp::Add | BinOp::Sub | BinOp::Mul | BinOp::Div => {
                 if lhs_type == DataType::Bool || rhs_type == DataType::Bool {
-                    Err(AnalysisError(String::from("binary operands are not compatible")))
+                    Err(AnalysisError(String::from(
+                        "binary operands are not compatible",
+                    )))
                 } else if lhs_type == DataType::Float || rhs_type == DataType::Float {
                     Ok(DataType::Float)
                 } else {
@@ -387,7 +424,9 @@ impl Analyzer {
             }
             BinOp::LogOr | BinOp::LogAnd => {
                 if lhs_type != DataType::Bool || rhs_type != DataType::Bool {
-                    Err(AnalysisError(String::from("binary operands are not compatible")))
+                    Err(AnalysisError(String::from(
+                        "binary operands are not compatible",
+                    )))
                 } else {
                     Ok(DataType::Bool)
                 }
@@ -397,14 +436,18 @@ impl Analyzer {
                     && lhs_type != DataType::Bool
                     || rhs_type != DataType::Bool
                 {
-                    Err(AnalysisError(String::from("binary operands are not compatible")))
+                    Err(AnalysisError(String::from(
+                        "binary operands are not compatible",
+                    )))
                 } else {
                     Ok(DataType::Bool)
                 }
             }
             BinOp::Lt | BinOp::Gt | BinOp::Leq | BinOp::Geq => {
                 if lhs_type == DataType::Bool || rhs_type == DataType::Bool {
-                    Err(AnalysisError(String::from("binary operands are not compatible")))
+                    Err(AnalysisError(String::from(
+                        "binary operands are not compatible",
+                    )))
                 } else {
                     Ok(DataType::Bool)
                 }
@@ -420,7 +463,9 @@ impl Analyzer {
         let expr_type = self.visit_expr(inner_expr)?;
 
         if expr_type == DataType::Void || expr_type == DataType::Bool {
-            return Err(AnalysisError(String::from("unary operand is not compatible")));
+            return Err(AnalysisError(String::from(
+                "unary operand is not compatible",
+            )));
         }
 
         Ok(expr_type)
@@ -434,7 +479,10 @@ impl Analyzer {
         let resolved = self.tab.resolve(&*res_ident.0);
 
         let Ok(def) = resolved else {
-            return Err(AnalysisError(format!("referenced undefined symbol '{}'", resolved.unwrap_err().0)));
+            return Err(AnalysisError(format!(
+                "referenced undefined symbol '{}'",
+                resolved.unwrap_err().0
+            )));
         };
 
         let def_info = &self.tab[def];
