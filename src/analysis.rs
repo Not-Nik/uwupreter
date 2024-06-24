@@ -99,6 +99,7 @@ use std::ops::Index;
 pub use symtab::{DefInfo, Definitions, FuncDefId, FuncInfo, LocalVarDefId, Symtab, VarInfo};
 
 use crate::ast;
+use crate::ast::{BinOp, DataType};
 
 mod symtab;
 
@@ -111,10 +112,29 @@ pub fn analyze(root: &mut ast::Program) -> Result<ProgramInfo, AnalysisError> {
         analyser.visit_item(item_id, item)?;
     }
 
+    let resolved = analyser.tab.resolve("main");
+
+    let Ok(def) = resolved else {
+        return Err(AnalysisError(String::from("main not defined")));
+    };
+
+    let def_info = &analyser.tab[def];
+
+    let DefInfo::Func(func_info) = def_info else {
+        return Err(AnalysisError(String::from("main is not a function")));
+    };
+
+    if func_info.param_count > 0 {
+        return Err(AnalysisError(String::from("main shouldn't take args")));
+    }
+
+    if func_info.return_type != DataType::Void {
+        return Err(AnalysisError(String::from("main should return void")));
+    }
+
     let mut info = analyser.tab.into_program_info();
 
-    // TODO: "main"-Funktion auflösen und an dieser einsetzen
-    info.main_func = None;
+    info.main_func = Some(FuncDefId(def));
 
     Ok(info)
 }
@@ -289,16 +309,37 @@ impl Analyzer {
             let _expr_type = self.visit_expr(expr)?;
         }
 
-        // TODO: Datentyp berechnen und anpassen
-        Ok(ast::DataType::Void)
+        let resolved = self.tab.resolve(&*call.res_ident.0);
+
+        let Ok(def) = resolved else {
+            return Err(AnalysisError(format!("referenced undefined symbol '{}'", resolved.unwrap_err().0)));
+        };
+
+        let def_info = &self.tab[def];
+
+        let DefInfo::Func(func_info) = def_info else {
+            return Err(AnalysisError(String::from("not a function")));
+        };
+
+        Ok(func_info.return_type)
     }
 
     /// Analyzes an assignment statement or expression and returns its type.
     fn visit_assign(&mut self, assign: &mut ast::Assign) -> Result<ast::DataType, AnalysisError> {
         let _rhs_type = self.visit_expr(&mut assign.rhs)?;
 
-        // TODO: Datentyp berechnen und anpassen
-        Ok(ast::DataType::Void)
+        let resolved = self.tab.resolve(&*assign.lhs.0);
+
+        let Ok(def) = resolved else {
+            return Err(AnalysisError(format!("referenced undefined symbol '{}'", resolved.unwrap_err().0)));
+        };
+
+        let def_info = &self.tab[def];
+
+        match def_info {
+            DefInfo::Func(_) => Err(AnalysisError(String::from("can't assign to a function"))),
+            DefInfo::LocalVar(var) | DefInfo::GlobalVar(var) => Ok(var.data_type),
+        }
     }
 
     /// Analyzes the condition expression of a control flow statement, expecting
@@ -327,11 +368,48 @@ impl Analyzer {
         &mut self,
         bin_op_expr: &mut ast::BinOpExpr,
     ) -> Result<ast::DataType, AnalysisError> {
-        let _lhs_type = self.visit_expr(&mut bin_op_expr.lhs)?;
-        let _rhs_type = self.visit_expr(&mut bin_op_expr.rhs)?;
+        let lhs_type = self.visit_expr(&mut bin_op_expr.lhs)?;
+        let rhs_type = self.visit_expr(&mut bin_op_expr.rhs)?;
 
-        // TODO: Datentyp berechnen und anpassen
-        Ok(ast::DataType::Void)
+        if lhs_type == DataType::Void || rhs_type == DataType::Void {
+            return Err(AnalysisError(String::from("can't binop with void")));
+        }
+
+        match bin_op_expr.op {
+            BinOp::Add | BinOp::Sub | BinOp::Mul | BinOp::Div => {
+                if lhs_type == DataType::Bool || rhs_type == DataType::Bool {
+                    Err(AnalysisError(String::from("binary operands are not compatible")))
+                } else if lhs_type == DataType::Float || rhs_type == DataType::Float {
+                    Ok(DataType::Float)
+                } else {
+                    Ok(DataType::Int)
+                }
+            }
+            BinOp::LogOr | BinOp::LogAnd => {
+                if lhs_type != DataType::Bool || rhs_type != DataType::Bool {
+                    Err(AnalysisError(String::from("binary operands are not compatible")))
+                } else {
+                    Ok(DataType::Bool)
+                }
+            }
+            BinOp::Eq | BinOp::Neq => {
+                if (lhs_type == DataType::Bool || rhs_type == DataType::Bool)
+                    && lhs_type != DataType::Bool
+                    || rhs_type != DataType::Bool
+                {
+                    Err(AnalysisError(String::from("binary operands are not compatible")))
+                } else {
+                    Ok(DataType::Bool)
+                }
+            }
+            BinOp::Lt | BinOp::Gt | BinOp::Leq | BinOp::Geq => {
+                if lhs_type == DataType::Bool || rhs_type == DataType::Bool {
+                    Err(AnalysisError(String::from("binary operands are not compatible")))
+                } else {
+                    Ok(DataType::Bool)
+                }
+            }
+        }
     }
 
     /// Analyzes an unary minus expression and returns its type.
@@ -339,19 +417,32 @@ impl Analyzer {
         &mut self,
         inner_expr: &mut ast::Expr,
     ) -> Result<ast::DataType, AnalysisError> {
-        let _expr_type = self.visit_expr(inner_expr)?;
+        let expr_type = self.visit_expr(inner_expr)?;
 
-        // TODO: Datentyp berechnen und anpassen
-        Ok(ast::DataType::Void)
+        if expr_type == DataType::Void || expr_type == DataType::Bool {
+            return Err(AnalysisError(String::from("unary operand is not compatible")));
+        }
+
+        Ok(expr_type)
     }
 
     /// Analyzes a variable expression and returns its type.
     fn visit_var_expr(
         &mut self,
-        _res_ident: &mut ast::ResIdent,
+        res_ident: &mut ast::ResIdent,
     ) -> Result<ast::DataType, AnalysisError> {
-        // TODO: Datentyp berechnen und anpassen
-        Ok(ast::DataType::Void)
+        let resolved = self.tab.resolve(&*res_ident.0);
+
+        let Ok(def) = resolved else {
+            return Err(AnalysisError(format!("referenced undefined symbol '{}'", resolved.unwrap_err().0)));
+        };
+
+        let def_info = &self.tab[def];
+
+        match def_info {
+            DefInfo::Func(_) => Err(AnalysisError(String::from("not a variable"))),
+            DefInfo::LocalVar(var) | DefInfo::GlobalVar(var) => Ok(var.data_type),
+        }
     }
 }
 
