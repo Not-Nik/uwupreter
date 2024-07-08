@@ -5,8 +5,10 @@ void main() {
 
     print(pos_inf); // inf
     print(neg_inf); // -inf
-    print(nan);     // NaN
+    print(nan);     // nan
 
-    print(nan == nan); // false
-    print(nan != nan); // true
+    print(nan == nan);  // false
+    print(nan != nan);  // true
+    print(pos_inf + 1); // inf
+    print(neg_inf - 1); // -inf
 }

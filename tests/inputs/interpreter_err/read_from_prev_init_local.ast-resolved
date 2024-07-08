@@ -1,0 +1,111 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "foo",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "i",
+                        ),
+                    },
+                ],
+                statements: [],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "bar",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "i",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        3,
+                                    ),
+                                ),
+                            },
+                            init: None,
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: Some(
+                                        DefId(
+                                            3,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Call(
+                        FuncCall {
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "foo",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        0,
+                                    ),
+                                ),
+                            },
+                            args: [
+                                Literal(
+                                    Int(
+                                        1,
+                                    ),
+                                ),
+                            ],
+                        },
+                    ),
+                    Call(
+                        FuncCall {
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "bar",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        2,
+                                    ),
+                                ),
+                            },
+                            args: [],
+                        },
+                    ),
+                ],
+            },
+        ),
+    ],
+}

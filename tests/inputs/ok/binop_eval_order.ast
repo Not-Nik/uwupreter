@@ -1,0 +1,537 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "f1",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "i",
+                        ),
+                    },
+                ],
+                statements: [
+                    Print(
+                        Expr(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: None,
+                                },
+                            ),
+                        ),
+                    ),
+                    Return(
+                        Some(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: None,
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        String(
+                            "Addition",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Subtraction",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Sub,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Multiplication",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Mul,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Division",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Div,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Lesser-than",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Lt,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Greater-than",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Gt,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Lesser-or-equal",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Leq,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Greater-or-equal",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Geq,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Equal-to",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Eq,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        String(
+                            "Not-equal-to",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Neq,
+                                    lhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    rhs: Call(
+                                        FuncCall {
+                                            res_ident: ResIdent {
+                                                ident: Ident(
+                                                    "f1",
+                                                ),
+                                                res: None,
+                                            },
+                                            args: [
+                                                Literal(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

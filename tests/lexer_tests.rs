@@ -145,7 +145,7 @@ fn neg_int_two_tokens() {
     assert_eq!(lexer.next(), None);
 }
 
-// `e0` should not be an ident and not a float literal.
+// `e0` should be an ident and not a float literal.
 #[test]
 fn e0_ident() {
     let token = Token::lexer("e0").next();

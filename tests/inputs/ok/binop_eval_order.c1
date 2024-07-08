@@ -1,0 +1,30 @@
+// Binary operations are evaluated from left to right.
+
+int f1(int i) {
+	print(i);
+	return i;
+}
+
+void main() {
+	print("Addition");
+	print(f1(0) + f1(1));
+	print("Subtraction");
+	print(f1(0) - f1(1));
+	print("Multiplication");
+	print(f1(0) * f1(1));
+	print("Division");
+	print(f1(0) / f1(1));
+	
+	print("Lesser-than");
+	print(f1(0) < f1(1));
+	print("Greater-than");
+	print(f1(0) > f1(1));
+	print("Lesser-or-equal");
+	print(f1(0) <= f1(1));
+	print("Greater-or-equal");
+	print(f1(0) >= f1(1));
+	print("Equal-to");
+	print(f1(0) == f1(1));
+	print("Not-equal-to");
+	print(f1(0) != f1(1));
+}

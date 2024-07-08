@@ -1,5 +1,7 @@
 inf
 -inf
-NaN
+nan
 false
 true
+inf
+-inf

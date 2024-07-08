@@ -1,0 +1,2 @@
+Unrecognized token `)` found at 22:23
+Expected one of "bool", "float", "int" or "void"

@@ -1,0 +1,116 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Int,
+                ident: Ident(
+                    "f1",
+                ),
+                params: [
+                    FuncParam {
+                        data_type: Int,
+                        ident: Ident(
+                            "i",
+                        ),
+                    },
+                ],
+                statements: [
+                    Print(
+                        Expr(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: None,
+                                },
+                            ),
+                        ),
+                    ),
+                    Return(
+                        Some(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: None,
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "a",
+                    ),
+                    res: None,
+                },
+                init: Some(
+                    Call(
+                        FuncCall {
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "f1",
+                                ),
+                                res: None,
+                            },
+                            args: [
+                                Literal(
+                                    Int(
+                                        0,
+                                    ),
+                                ),
+                            ],
+                        },
+                    ),
+                ),
+            },
+        ),
+        GlobalVar(
+            VarDef {
+                data_type: Int,
+                res_ident: ResIdent {
+                    ident: Ident(
+                        "b",
+                    ),
+                    res: None,
+                },
+                init: Some(
+                    Call(
+                        FuncCall {
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "f1",
+                                ),
+                                res: None,
+                            },
+                            args: [
+                                Literal(
+                                    Int(
+                                        1,
+                                    ),
+                                ),
+                            ],
+                        },
+                    ),
+                ),
+            },
+        ),
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [],
+            },
+        ),
+    ],
+}

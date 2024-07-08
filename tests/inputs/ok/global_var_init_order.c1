@@ -1,0 +1,11 @@
+// Global variables are initialized in the order of declaration.
+
+int f1(int i) {
+	print(i);
+	return i;
+}
+
+int a = f1(0);
+int b = f1(1);
+
+void main() {}

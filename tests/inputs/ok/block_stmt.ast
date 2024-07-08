@@ -1,0 +1,87 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Block(
+                        Block {
+                            statements: [
+                                Print(
+                                    Expr(
+                                        Literal(
+                                            Int(
+                                                0,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                                Block(
+                                    Block {
+                                        statements: [
+                                            Print(
+                                                Expr(
+                                                    Literal(
+                                                        Int(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                            Block(
+                                                Block {
+                                                    statements: [
+                                                        Print(
+                                                            Expr(
+                                                                Literal(
+                                                                    Int(
+                                                                        2,
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Print(
+                                                            Expr(
+                                                                Literal(
+                                                                    Int(
+                                                                        3,
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                            Print(
+                                                Expr(
+                                                    Literal(
+                                                        Int(
+                                                            4,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                        ],
+                                    },
+                                ),
+                            ],
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Literal(
+                                Int(
+                                    5,
+                                ),
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

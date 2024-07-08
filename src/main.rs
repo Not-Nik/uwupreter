@@ -1,4 +1,4 @@
-use uwupreter::{analyze, parse};
+use uwupreter::{analyze, interpret, parse};
 use std::{env, fs, process::ExitCode};
 
 fn main() -> ExitCode {
@@ -48,7 +48,21 @@ fn main() -> ExitCode {
         }
     };
 
-    print!("{analysis:?}");
+    // Use the resolved AST and the auxiliary information from analysis
+    // to execute the program in an interpreter.
+    let output = match interpret(&ast, &analysis) {
+        Ok(output) => {
+            println!("[✓] execution");
+            output
+        }
+        Err(err) => {
+            println!("[x] execution");
+            println!("{err}");
+            return ExitCode::FAILURE;
+        }
+    };
+
+    print!("{output}");
 
     ExitCode::SUCCESS
 }

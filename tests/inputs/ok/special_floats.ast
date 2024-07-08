@@ -180,6 +180,50 @@ Program {
                             ),
                         ),
                     ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Add,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "pos_inf",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            BinaryOp(
+                                BinOpExpr {
+                                    op: Sub,
+                                    lhs: Var(
+                                        ResIdent {
+                                            ident: Ident(
+                                                "neg_inf",
+                                            ),
+                                            res: None,
+                                        },
+                                    ),
+                                    rhs: Literal(
+                                        Int(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
                 ],
             },
         ),

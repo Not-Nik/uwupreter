@@ -1,0 +1,14 @@
+// Should fail because not initialized, but will pass if local variables
+// aren't explicitly initialized as uninit.
+
+void foo(int i) {}
+
+void bar() {
+	int i;
+	print(i);
+}
+
+void main() {
+	foo(1);
+	bar();
+}

@@ -1,1 +1,1 @@
-attempted to load from uninitialized variable `x`
+attempted to read uninitialized variable `x`

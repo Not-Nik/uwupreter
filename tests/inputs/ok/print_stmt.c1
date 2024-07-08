@@ -1,0 +1,10 @@
+// Tests the print statement for non-special literals.
+
+void main() {
+	print("String");
+	print(1234567);
+	print(1.5);
+	print(123e-12);
+	print(true);
+	print(false);
+}

@@ -1,0 +1,13 @@
+// komplexerer Testfall einer verschachtelten if-Anweisung in einer while-Schleife
+// von Anna Schuster
+
+void main() {
+	int i = 0;
+	
+	while (i == 0)
+		if (true)
+			if (true)
+				i = 1;
+	
+	print("Erfolg!");
+}

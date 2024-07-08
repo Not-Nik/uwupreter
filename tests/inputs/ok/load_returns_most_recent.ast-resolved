@@ -1,0 +1,120 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "i",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        1,
+                                    ),
+                                ),
+                            },
+                            init: None,
+                        },
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "i",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        1,
+                                    ),
+                                ),
+                            },
+                            rhs: Literal(
+                                Int(
+                                    0,
+                                ),
+                            ),
+                        },
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "i",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        1,
+                                    ),
+                                ),
+                            },
+                            rhs: Literal(
+                                Int(
+                                    1,
+                                ),
+                            ),
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: Some(
+                                        DefId(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                    Assign(
+                        Assign {
+                            lhs: ResIdent {
+                                ident: Ident(
+                                    "i",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        1,
+                                    ),
+                                ),
+                            },
+                            rhs: Literal(
+                                Int(
+                                    2,
+                                ),
+                            ),
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Var(
+                                ResIdent {
+                                    ident: Ident(
+                                        "i",
+                                    ),
+                                    res: Some(
+                                        DefId(
+                                            1,
+                                        ),
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

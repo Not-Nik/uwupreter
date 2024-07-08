@@ -1,0 +1,15 @@
+// Function-call expressions are executed from left to right.
+
+int f1(int i) {
+	print(i);
+	return i;
+}
+
+void f2(int _1, int _2) {
+	print(_1);
+	print(_2);
+}
+
+void main() {
+	f2(f1(0), f1(1));
+}

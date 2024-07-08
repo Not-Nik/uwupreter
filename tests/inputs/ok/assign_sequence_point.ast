@@ -1,0 +1,88 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "i",
+                                ),
+                                res: None,
+                            },
+                            init: Some(
+                                Literal(
+                                    Int(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                    Print(
+                        Expr(
+                            Assign(
+                                Assign {
+                                    lhs: ResIdent {
+                                        ident: Ident(
+                                            "i",
+                                        ),
+                                        res: None,
+                                    },
+                                    rhs: BinaryOp(
+                                        BinOpExpr {
+                                            op: Add,
+                                            lhs: Assign(
+                                                Assign {
+                                                    lhs: ResIdent {
+                                                        ident: Ident(
+                                                            "i",
+                                                        ),
+                                                        res: None,
+                                                    },
+                                                    rhs: BinaryOp(
+                                                        BinOpExpr {
+                                                            op: Add,
+                                                            lhs: Var(
+                                                                ResIdent {
+                                                                    ident: Ident(
+                                                                        "i",
+                                                                    ),
+                                                                    res: None,
+                                                                },
+                                                            ),
+                                                            rhs: Literal(
+                                                                Int(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                },
+                                            ),
+                                            rhs: Var(
+                                                ResIdent {
+                                                    ident: Ident(
+                                                        "i",
+                                                    ),
+                                                    res: None,
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                },
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

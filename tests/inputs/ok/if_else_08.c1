@@ -1,0 +1,21 @@
+// komplexerer Testfall einer if-Anweisung mit else in einer while- und einer do-while-Schleife
+// von Anna Schuster
+
+void main() {
+	int i = 0;
+	if (true)
+		if (true)
+			while (i == 0)
+				if (true)
+					i = 1;
+				else
+					i = 0;
+		else
+			do
+				if (true)
+					if (true)
+						i = 1;
+			while (i == 0);
+	
+	print("Erfolg!");
+}

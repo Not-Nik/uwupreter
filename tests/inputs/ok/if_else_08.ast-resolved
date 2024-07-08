@@ -1,0 +1,203 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    VarDef(
+                        VarDef {
+                            data_type: Int,
+                            res_ident: ResIdent {
+                                ident: Ident(
+                                    "i",
+                                ),
+                                res: Some(
+                                    DefId(
+                                        1,
+                                    ),
+                                ),
+                            },
+                            init: Some(
+                                Literal(
+                                    Int(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        },
+                    ),
+                    If(
+                        IfStmt {
+                            cond: Literal(
+                                Bool(
+                                    true,
+                                ),
+                            ),
+                            if_true: If(
+                                IfStmt {
+                                    cond: Literal(
+                                        Bool(
+                                            true,
+                                        ),
+                                    ),
+                                    if_true: While(
+                                        WhileStmt {
+                                            cond: BinaryOp(
+                                                BinOpExpr {
+                                                    op: Eq,
+                                                    lhs: Var(
+                                                        ResIdent {
+                                                            ident: Ident(
+                                                                "i",
+                                                            ),
+                                                            res: Some(
+                                                                DefId(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                    rhs: Literal(
+                                                        Int(
+                                                            0,
+                                                        ),
+                                                    ),
+                                                },
+                                            ),
+                                            body: If(
+                                                IfStmt {
+                                                    cond: Literal(
+                                                        Bool(
+                                                            true,
+                                                        ),
+                                                    ),
+                                                    if_true: Assign(
+                                                        Assign {
+                                                            lhs: ResIdent {
+                                                                ident: Ident(
+                                                                    "i",
+                                                                ),
+                                                                res: Some(
+                                                                    DefId(
+                                                                        1,
+                                                                    ),
+                                                                ),
+                                                            },
+                                                            rhs: Literal(
+                                                                Int(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                    if_false: Some(
+                                                        Assign(
+                                                            Assign {
+                                                                lhs: ResIdent {
+                                                                    ident: Ident(
+                                                                        "i",
+                                                                    ),
+                                                                    res: Some(
+                                                                        DefId(
+                                                                            1,
+                                                                        ),
+                                                                    ),
+                                                                },
+                                                                rhs: Literal(
+                                                                    Int(
+                                                                        0,
+                                                                    ),
+                                                                ),
+                                                            },
+                                                        ),
+                                                    ),
+                                                },
+                                            ),
+                                        },
+                                    ),
+                                    if_false: Some(
+                                        DoWhile(
+                                            WhileStmt {
+                                                cond: BinaryOp(
+                                                    BinOpExpr {
+                                                        op: Eq,
+                                                        lhs: Var(
+                                                            ResIdent {
+                                                                ident: Ident(
+                                                                    "i",
+                                                                ),
+                                                                res: Some(
+                                                                    DefId(
+                                                                        1,
+                                                                    ),
+                                                                ),
+                                                            },
+                                                        ),
+                                                        rhs: Literal(
+                                                            Int(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                    },
+                                                ),
+                                                body: If(
+                                                    IfStmt {
+                                                        cond: Literal(
+                                                            Bool(
+                                                                true,
+                                                            ),
+                                                        ),
+                                                        if_true: If(
+                                                            IfStmt {
+                                                                cond: Literal(
+                                                                    Bool(
+                                                                        true,
+                                                                    ),
+                                                                ),
+                                                                if_true: Assign(
+                                                                    Assign {
+                                                                        lhs: ResIdent {
+                                                                            ident: Ident(
+                                                                                "i",
+                                                                            ),
+                                                                            res: Some(
+                                                                                DefId(
+                                                                                    1,
+                                                                                ),
+                                                                            ),
+                                                                        },
+                                                                        rhs: Literal(
+                                                                            Int(
+                                                                                1,
+                                                                            ),
+                                                                        ),
+                                                                    },
+                                                                ),
+                                                                if_false: None,
+                                                            },
+                                                        ),
+                                                        if_false: None,
+                                                    },
+                                                ),
+                                            },
+                                        ),
+                                    ),
+                                },
+                            ),
+                            if_false: None,
+                        },
+                    ),
+                    Print(
+                        String(
+                            "Erfolg!",
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}

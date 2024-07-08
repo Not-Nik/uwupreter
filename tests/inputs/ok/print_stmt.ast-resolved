@@ -1,0 +1,65 @@
+Program {
+    items: [
+        Func(
+            FuncDef {
+                return_type: Void,
+                ident: Ident(
+                    "main",
+                ),
+                params: [],
+                statements: [
+                    Print(
+                        String(
+                            "String",
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            Literal(
+                                Int(
+                                    1234567,
+                                ),
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            Literal(
+                                Float(
+                                    1.5,
+                                ),
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            Literal(
+                                Float(
+                                    1.23e-10,
+                                ),
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            Literal(
+                                Bool(
+                                    true,
+                                ),
+                            ),
+                        ),
+                    ),
+                    Print(
+                        Expr(
+                            Literal(
+                                Bool(
+                                    false,
+                                ),
+                            ),
+                        ),
+                    ),
+                ],
+            },
+        ),
+    ],
+}
